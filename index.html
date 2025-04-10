@@ -4,14 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' type='text/css'>
+    <!-- If we want more/other fonts add them here -->
+    <link href="./styles.css" rel="stylesheet">
     <title>Task Managment Application</title>
 </head>
-<body>
+<body class="bg-light bg-gradient">
+    <div class="container">
+        <header>
+            <div class="row text-dark">
+                <div class="col-12 text-center m-1">
+                    <h1>WeManage</h1>
+                    <h2>Your Task Organization Needs</h2>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./wemanagelogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> <!--Logo location THIS NEEDS TO BE RESIZED AND THE BG NEEDS TO BE TRANSPARENT-->
+                WeManage
+            </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>                                                     <!--This is for when it shrinks down to phone size-->
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-outline-light">Add Task</button></a> <!--ADD TASK BUTTON DOES NOT WORK YET-->
+            </li>
+            <form class="d-flex ms-auto" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search For Task" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>                                     <!--EMPTY SEARCH FUNCTION-->
+            </form>
+        </div>
+        </div>
+    </nav>
+
     <main>
-        <h1>Welcome to the Task Manager!</h1>  
-        <hr />
-        <p> content will go here </p>
+        <div class="row gx-3"> <!-- Added row wrapper -->
+            <!-- Sidebar Column -->
+            <div class="col-2">
+                <div class="ms-1 mt-3 sticky-top bg-light bg-gradient rounded-2" style="top: 56px;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-dark text-light bg-gradient"> Sort <img src="./sort-by.svg" alt="Sort-By" width="30" height="24" class="d-inline-block align-text-top"></li>
+                        <li class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="listGroupSort" value="" id="alphabeticalSort" checked>
+                        <label class="form-check-label" for="alphabeticalSort"> A-Z </label>
+                        </li>
+                        <li class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="listGroupSort" value="" id="prioritySort">
+                        <label class="form-check-label" for="prioritySort"> Priority </label>
+                        </li>
+                        <li class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="listGroupSort" value="" id="deadlineSort">
+                        <label class="form-check-label" for="deadlineSort">Closest Deadline</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content Column -->
+            <div class="col-10">
+                <div class="container scrollspy bg-body-tertiary p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- All your existing cards and content below -->
+                            <div class="card col-12 my-5">
+                                <div class="card-header">
+                                To-do
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item list-group-item-action">Task #1</li>
+                                <!--Tasks go here-->
+                                </ul>
+                            </div> 
+                            <div class="card col-12 my-5">
+                                <div class="card-header">
+                                Completed Tasks
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item completed">Completed Task</li>
+                                <!--Completed tasks go here-->
+                                </ul>
+                            </div>
+                            <div class="card col-12 my-5">
+                                <p>This is for testing the stickiness of sticky things.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere semper purus quis interdum. Aenean tempor consequat tincidunt. Vivamus laoreet sollicitudin libero, quis porttitor magna facilisis a. Donec tincidunt leo at nisi laoreet, at hendrerit arcu dignissim. Integer lobortis eu urna luctus congue. Proin facilisis est quis malesuada placerat. In laoreet, enim sit amet bibendum pulvinar, lacus turpis dapibus elit, id viverra diam diam vel lacus. Duis mollis lacus tortor, quis tincidunt ligula suscipit quis. Nullam sollicitudin mattis elit quis pellentesque. Phasellus diam tortor, fringilla et nibh in, semper semper ex.
+
+                                    Vivamus dignissim ex dictum, condimentum lectus a, imperdiet mauris. Nunc condimentum nunc et pretium fringilla. Suspendisse lobortis, odio aliquam semper fringilla, sapien neque porttitor orci, et imperdiet erat lectus vitae justo. Duis a libero enim. Nunc fermentum nunc vel diam iaculis lobortis. Ut dapibus pellentesque velit eu maximus. Maecenas id urna nulla. Nunc vestibulum porttitor massa. Donec sapien ante, vehicula at justo eu, porttitor aliquet erat. Proin ullamcorper quam quis risus eleifend, ac pellentesque nunc placerat. Aliquam bibendum ut nisi ac condimentum. Cras malesuada, felis vitae commodo efficitur, nulla ex cursus neque, eget convallis tortor sapien vel turpis.
+                                    
+                                    Donec condimentum, erat sit amet hendrerit eleifend, massa odio dapibus urna, vel ultricies nulla odio vitae ante. Nulla ullamcorper nisi vel sem tristique tempor. Praesent ligula nisi, tempus a pellentesque id, bibendum sed magna. Aenean hendrerit purus nec eros sodales suscipit. Praesent suscipit pharetra mattis. Nullam elementum nisl aliquam finibus facilisis. Morbi porta lacus felis, consectetur sodales nisl ornare id. Aenean ac sodales elit. Phasellus et consequat sapien, id tincidunt sapien. Sed sed ornare nisi.
+                                    
+                                    Nullam dui risus, aliquet ac eros sed, volutpat vestibulum velit. Aliquam blandit mi eu orci dapibus, in ornare nulla porttitor. Etiam posuere quis tellus vitae feugiat. Integer volutpat varius pharetra. Maecenas lorem purus, tincidunt a rhoncus nec, vehicula ac sem. Nunc dictum pretium ante eu molestie. Cras ac lacinia diam, sit amet egestas erat. Fusce suscipit scelerisque est, ut iaculis dolor laoreet nec. Phasellus facilisis enim risus. Vivamus vel commodo tortor, nec tempor nisi. Suspendisse eu maximus nulla. Curabitur sit amet magna nunc. Vivamus molestie dignissim est ac tristique.
+                                    
+                                    Ut pulvinar neque id mi interdum mollis. Proin lobortis nisi id euismod elementum. Vestibulum porttitor non dolor sit amet egestas. Aenean pulvinar elementum vehicula. Vestibulum aliquam mattis orci ut ullamcorper. Aliquam erat volutpat. Integer tempor mauris sit amet nulla eleifend, pharetra tincidunt turpis feugiat. Phasellus maximus elit dolor, a tempus diam molestie vel. Aliquam est nulla, consectetur eget mi ut, scelerisque aliquam sem. Etiam ac scelerisque ex. Vivamus a dictum ex, vel pretium dui. Phasellus mattis neque id dolor ullamcorper, luctus pellentesque urna cursus. Morbi vitae elit odio.
+                                    
+                                    Pellentesque egestas semper lacus, ac commodo tellus convallis ut. Nam egestas mattis auctor. Praesent convallis risus nec accumsan feugiat. Praesent accumsan eros a feugiat interdum. Proin elementum in magna non pellentesque. Cras sed arcu ac eros maximus maximus a eu velit. Donec in ultrices metus. Nulla facilisi.
+                                    
+                                    Phasellus lorem diam, luctus vestibulum elit nec, aliquet efficitur magna. Donec efficitur at nibh sollicitudin efficitur. Quisque pellentesque nisl a orci fermentum vehicula. Mauris ut ultrices felis. Phasellus scelerisque, ex vel molestie imperdiet, arcu ex sagittis risus, a efficitur velit elit facilisis diam. Pellentesque interdum sagittis lectus efficitur hendrerit. Maecenas sed sem elementum, consectetur quam non, hendrerit turpis. Mauris ac diam id magna malesuada bibendum.
+                                    
+                                    In hac habitasse platea dictumst. Cras sapien lacus, porta eu leo et, tristique dignissim eros. Cras a erat molestie, dictum ligula at, tempor nisi. Praesent gravida, dolor et hendrerit tempor, arcu mauris fringilla ipsum, nec euismod eros nisi vel urna. Suspendisse elementum auctor ligula, in iaculis tortor commodo ut. Cras nec dictum magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla porttitor vestibulum erat a bibendum. Vestibulum imperdiet, mauris in condimentum tincidunt, dolor diam imperdiet felis, id luctus dui orci ultricies tortor. Nunc tellus nunc, semper vitae viverra eget, lacinia nec lectus. Nunc ac ante in ex sollicitudin scelerisque. Phasellus porttitor arcu nulla, non vehicula turpis congue ut. Sed sed rutrum massa, nec viverra felis. </p>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- jQuery -->
     <script src="app.js"></script>
 </body>
 </html>
