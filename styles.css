@@ -1,0 +1,22 @@
+header {
+    font-family: 'Inter', serif;
+}
+body {
+    font-family: 'Montserrat', serif;
+}
+/* Fonts above */
+
+nav {
+    opacity: .95;
+}
+
+/* completed is for any task that has been completed, it will grey it out and strike it out */
+.completed {
+    text-decoration: line-through;
+    background-color: #828181;
+}
+
+/* we cant use the same hover system for the completed tasks because bootstap freaks out and makes it wonky so i made this */
+.completed:hover {
+    background-color: #707070;
+}
