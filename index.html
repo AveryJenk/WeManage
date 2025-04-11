@@ -26,7 +26,7 @@
         </header>
     </div>
 
-    <nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
+    <nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark"> <!-- NAVIGATION BAR -->
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="./wemanagelogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> <!--Logo location THIS NEEDS TO BE RESIZED AND THE BG NEEDS TO BE TRANSPARENT-->
@@ -37,7 +37,8 @@
         </button>                                                     <!--This is for when it shrinks down to phone size-->
         <div class="collapse navbar-collapse" id="navbarColor01">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-outline-light">Add Task</button></a> <!--ADD TASK BUTTON DOES NOT WORK YET-->
+                <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button></a> 
+                <!--ADD TASK BUTTON DOES NOT WORK YET also can be restyled since carson is making the buttons-->
             </li>
             <form class="d-flex ms-auto" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search For Task" aria-label="Search">
@@ -46,9 +47,9 @@
         </div>
         </div>
     </nav>
-
+    
     <main>
-        <div class="row gx-3"> <!-- Added row wrapper -->
+        <div class="row gx-3">
             <!-- Sidebar Column -->
             <div class="col-2">
                 <div class="ms-1 mt-3 sticky-top bg-light bg-gradient rounded-2" style="top: 56px;">
@@ -75,13 +76,13 @@
                 <div class="container scrollspy bg-body-tertiary p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
                     <div class="row">
                         <div class="col-12">
-                            <!-- All your existing cards and content below -->
                             <div class="card col-12 my-5">
                                 <div class="card-header">
                                 To-do
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item list-group-item-action">Task #1</li>
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #1 <span class="fs-6">Deadline: 00-00-0000</span></li>
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #2 <span class="fs-6">Deadline: 00-00-0000</span></li>
                                 <!--Tasks go here-->
                                 </ul>
                             </div> 
@@ -90,12 +91,12 @@
                                 Completed Tasks
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                <li class="list-group-item completed">Completed Task</li>
+                                <li class="list-group-item completed d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Completed Task <span class="fs-6">Completed: 00-00-0000</span></li>
                                 <!--Completed tasks go here-->
                                 </ul>
                             </div>
                             <div class="card col-12 my-5">
-                                <p>This is for testing the stickiness of sticky things.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere semper purus quis interdum. Aenean tempor consequat tincidunt. Vivamus laoreet sollicitudin libero, quis porttitor magna facilisis a. Donec tincidunt leo at nisi laoreet, at hendrerit arcu dignissim. Integer lobortis eu urna luctus congue. Proin facilisis est quis malesuada placerat. In laoreet, enim sit amet bibendum pulvinar, lacus turpis dapibus elit, id viverra diam diam vel lacus. Duis mollis lacus tortor, quis tincidunt ligula suscipit quis. Nullam sollicitudin mattis elit quis pellentesque. Phasellus diam tortor, fringilla et nibh in, semper semper ex.
+                                <p>This is for testing the stickiness of sticky things. This will not be in the final product. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere semper purus quis interdum. Aenean tempor consequat tincidunt. Vivamus laoreet sollicitudin libero, quis porttitor magna facilisis a. Donec tincidunt leo at nisi laoreet, at hendrerit arcu dignissim. Integer lobortis eu urna luctus congue. Proin facilisis est quis malesuada placerat. In laoreet, enim sit amet bibendum pulvinar, lacus turpis dapibus elit, id viverra diam diam vel lacus. Duis mollis lacus tortor, quis tincidunt ligula suscipit quis. Nullam sollicitudin mattis elit quis pellentesque. Phasellus diam tortor, fringilla et nibh in, semper semper ex.
 
                                     Vivamus dignissim ex dictum, condimentum lectus a, imperdiet mauris. Nunc condimentum nunc et pretium fringilla. Suspendisse lobortis, odio aliquam semper fringilla, sapien neque porttitor orci, et imperdiet erat lectus vitae justo. Duis a libero enim. Nunc fermentum nunc vel diam iaculis lobortis. Ut dapibus pellentesque velit eu maximus. Maecenas id urna nulla. Nunc vestibulum porttitor massa. Donec sapien ante, vehicula at justo eu, porttitor aliquet erat. Proin ullamcorper quam quis risus eleifend, ac pellentesque nunc placerat. Aliquam bibendum ut nisi ac condimentum. Cras malesuada, felis vitae commodo efficitur, nulla ex cursus neque, eget convallis tortor sapien vel turpis.
                                     
@@ -117,6 +118,95 @@
             </div>
         </div>
     </main>
+
+           <!-- ALL MODALS BELOW THIS POINT-->
+    <!-- NONE OF THE FORMS ACTUALLY INPUT ANYWHERE-->
+
+    <!-- Add task modal ALSO WILL BE EDIT MODAL JUST NEEDS JS IMPLEMENTATION -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true"> 
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="taskModalTitle modal-title fs-5" id="taskModalLabel">Add a New Task</h1>
+                </div>
+                <div class="modal-body">
+                    <label for="taskInputName" class="form-label">Task Name</label>
+                    <div class="input-group mb-3">
+                        <input type="text" id="taskInputName" class="form-control" placeholder="Task Name" aria-label="Task Name" aria-describedby="basic-addon1">
+                    </div>          
+                    <hr>      
+                    <label for="taskInputDescription" class="form-label">Task Description</label>                           
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" id="taskInputDescription" placeholder="Task Description" aria-label="Task Description"></textarea>
+                    </div>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <label for="deadlineInput">Deadline:</label>
+                        <input type="date" id="deadlineInput" name="deadline" class="ms-4 rounded-2"
+                        value="0000-00-00"/> <!-- WHEN CODE IMPLEMENTED CHANGE TO CURRENT DATE-->
+                    </div>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <label for="priorityRange" class="form-label">Priority</label>
+                        <div class="d-flex flex-column w-100">
+                            <input type="range" class="form-range" id="priorityRange"
+                                   min="1" 
+                                   max="10" 
+                                   value="5">
+                            <div class="d-flex justify-content-between mt-1 ms-2">
+                                <span class="text-muted" style="font-size: 0.8rem">1</span>
+                                <span class="text-muted" style="font-size: 0.8rem">2</span>
+                                <span class="text-muted" style="font-size: 0.8rem">3</span>
+                                <span class="text-muted" style="font-size: 0.8rem">4</span>
+                                <span class="text-muted" style="font-size: 0.8rem">5</span>
+                                <span class="text-muted" style="font-size: 0.8rem">6</span>
+                                <span class="text-muted" style="font-size: 0.8rem">7</span>
+                                <span class="text-muted" style="font-size: 0.8rem">8</span>
+                                <span class="text-muted" style="font-size: 0.8rem">9</span>
+                                <span class="text-muted" style="font-size: 0.8rem">10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                                        
+                    <button type="button" class="btn btn-primary skillAdd">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Task Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center gap-3">
+                    <h1 class="taskModalTitle modal-title fs-5 mb-0" id="taskModalLabel">Task Title</h1>
+                    <div class="flex-grow-1 border-bottom border-2 border-secondary opacity-50"></div>
+                    <h1 class="taskModalDeadlineState modal-title fs-5 mb-0" id="taskModalDeadlineState"> Ongoing </h1>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Vivamus dignissim ex dictum, condimentum lectus a, imperdiet mauris. Nunc condimentum nunc et pretium fringilla. Suspendisse lobortis, odio aliquam semper fringilla, sapien neque porttitor orci, et imperdiet erat lectus vitae justo. Duis a libero enim. Nunc fermentum nunc vel diam iaculis lobortis. Ut dapibus pellentesque velit eu maximus. Maecenas id urna nulla. Nunc vestibulum porttitor massa. Donec sapien ante, vehicula at justo eu, porttitor aliquet erat. Proin ullamcorper quam quis risus eleifend, ac pellentesque nunc placerat. Aliquam bibendum ut nisi ac condimentum. Cras malesuada, felis vitae commodo efficitur, nulla ex cursus neque, eget convallis tortor sapien vel turpis.
+                    </p>
+                    <hr>
+                    <p>
+                        Priority: 1
+                    </p>
+                    <p>
+                        Deadline: 00-00-0000
+                    </p>
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-danger skillAdd">Delete</button>
+                    <button type="button" class="btn btn-warning skillAdd">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                                        
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- jQuery -->
     <script src="app.js"></script>
 </body>
