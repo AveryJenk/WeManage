@@ -25,18 +25,18 @@
     </div>
 </div>  
     
-<nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark"> <!-- NAVIGATION BAR -->
+<nav class="navbar shadow-lg navbar-expand-lg navbar custom-navbar sticky-top"> <!-- NAVIGATION BAR -->
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>                                                     <!--This is for when it shrinks down to phone size-->
         <div class="collapse navbar-collapse" id="navbarColor01">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button></a> 
+                <button class="btn custom-outline-btn" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
                 <!--ADD TASK BUTTON DOES NOT WORK YET also can be restyled since carson is making the buttons-->
             </li>
             <!-- Right: Search Box (Kaylynn)-->
-            <div class="card shadow-lg ms-auto p-2">
+            <div class="card shadow-lg ms-auto p-2 ">
                 <input type="text" id="skillSearch" class="form-control" placeholder="Search for a task...">
             </div>
         </div>
@@ -68,12 +68,12 @@
            
             <!-- Main Content Column -->
             <div class="col-10">
-                <div class="container scrollspy bg-body-tertiary p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
+                <div class="container scrollspy main-panel p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
                     <div class="row">
                         <div class="col-12">
                             <div class="card col-12 my-5">
                                 <div class="card-header">
-                                To-do
+                                To-do 📌
                                 </div>
                                 <ul class="list-group list-group-flush"  id="todoList">
                                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #1 <span class="fs-6">Deadline: 00-00-0000</span></li>
@@ -83,7 +83,7 @@
                             </div> 
                             <div class="card col-12 my-5">
                                 <div class="card-header">
-                                Completed Tasks
+                                Completed Tasks✅
                                 </div>
                                 <ul class="list-group list-group-flush" id="completedList">
                                 <li class="list-group-item completed d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Completed Task <span class="fs-6">Completed: 00-00-0000</span></li>
@@ -125,24 +125,24 @@
                     <h1 class="taskModalTitle modal-title fs-5" id="taskModalLabel">Add a New Task</h1>
                 </div>
                 <div class="modal-body">
-                    <label for="taskInputName" class="form-label">Task Name</label>
+                    <label for="taskInputName" class="form-label">Task Name✏️</label>
                     <div class="input-group mb-3">
                         <input type="text" id="taskInputName" class="form-control" placeholder="Task Name" aria-label="Task Name" aria-describedby="basic-addon1">
                     </div>          
                     <hr>      
-                    <label for="taskInputDescription" class="form-label">Task Description</label>                           
+                    <label for="taskInputDescription" class="form-label">Task Description📝</label>                           
                     <div class="input-group mb-3">
                         <textarea class="form-control" id="taskInputDescription" placeholder="Task Description" aria-label="Task Description"></textarea>
                     </div>
                     <hr>
                     <div class="input-group mb-3">
-                        <label for="deadlineInput">Deadline:</label>
+                        <label for="deadlineInput">Deadline 📅:</label>
                         <input type="date" id="deadlineInput" name="deadline" class="ms-4 rounded-2"
                         value="0000-00-00"/> <!-- WHEN CODE IMPLEMENTED CHANGE TO CURRENT DATE-->
                     </div>
                     <hr>
                     <div class="input-group mb-3">
-                        <label for="priorityRange" class="form-label">Priority</label>
+                        <label for="priorityRange" class="form-label">Priority⚠️</label>
                         <div class="d-flex flex-column w-100">
                             <input type="range" class="form-range" id="priorityRange"
                                    min="1" 
@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                                        
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>                                                        
                     <button type="button" class="btn btn-primary skillAdd">Add Task</button>
                 </div>
             </div>
