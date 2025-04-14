@@ -17,7 +17,7 @@
 <div class="row text-dark align-items-center"> <!--This section holds our logo and brand statement (Kaylynn)-->
     <div class="col-md-4 text-start">
         <a class="navbar-brand" href="#">
-            <img src="./images/wemanagelogotransparent.png" alt="Logo" width="200" height="auto" class="img-fluid">
+            <img src="./wemanagelogotransparent.png" alt="Logo" width="200" height="auto" class="img-fluid">
         </a>
     </div>
     <div class="col-md-8 text-center">
@@ -25,9 +25,8 @@
     </div>
 </div>  
     
- <nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark"> <!-- NAVIGATION BAR -->
-        <div class="container-fluid">
-           
+<nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark"> <!-- NAVIGATION BAR -->
+    <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>                                                     <!--This is for when it shrinks down to phone size-->
@@ -36,32 +35,19 @@
                 <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button></a> 
                 <!--ADD TASK BUTTON DOES NOT WORK YET also can be restyled since carson is making the buttons-->
             </li>
-            
+            <!-- Right: Search Box (Kaylynn)-->
+            <div class="card shadow-lg ms-auto p-2">
+                <input type="text" id="skillSearch" class="form-control" placeholder="Search for a task...">
+            </div>
         </div>
-        </div>
-    </nav>
-    
-
-<nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" \>
-    <div class="container-fluid">
-      <!-- Horizontal Layout (Kaylynn) -->
-      <div class="d-flex justify-content-between align-items-center w-100">
-        
-          
-        <!-- Right: Search Box (Kaylynn)-->
-        <div class="card shadow-lg p-2">
-          <input type="text" id="skillSearch" class="form-control" placeholder="Search for a task...">
-        </div>
-  
-      </div>
-  
     </div>
-  </nav>
+</nav>
+
     <main>
         <div class="row gx-3">
             <!-- Sidebar Column -->
             <div class="col-2">
-                <div class="ms-1 mt-3 sticky-top bg-light bg-gradient rounded-2" style="top: 56px;">
+                <div class="ms-1 mt-3 sticky-top bg-light bg-gradient rounded-2" style="top: 75px;"> <!-- Style top should be changed based on height of the navbar but idk how to do that so i just eyeballed it -AJ -->
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-dark text-light bg-gradient"> Sort <img src="./sort-by.svg" alt="Sort-By" width="30" height="24" class="d-inline-block align-text-top"></li>
                         <li class="list-group-item">
