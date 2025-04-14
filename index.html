@@ -14,24 +14,20 @@
     <link href="./styles.css" rel="stylesheet">
     <title>Task Managment Application</title>
 </head>
-<body class="bg-light bg-gradient">
-    <div class="container">
-        <header>
-            <div class="row text-dark">
-                <div class="col-12 text-center m-1">
-                    <h1>WeManage</h1>
-                    <h2>Your Task Organization Needs</h2>
-                </div>
-            </div>
-        </header>
+<div class="row text-dark align-items-center"> <!--This section holds our logo and brand statement (Kaylynn)-->
+    <div class="col-md-4 text-start">
+        <a class="navbar-brand" href="#">
+            <img src="./images/wemanagelogotransparent.png" alt="Logo" width="200" height="auto" class="img-fluid">
+        </a>
     </div>
-
-    <nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark"> <!-- NAVIGATION BAR -->
+    <div class="col-md-8 text-center">
+        <h1>WeManage – Your Home to Organize. Prioritize. Achieve.</h1>
+    </div>
+</div>  
+    
+ <nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark"> <!-- NAVIGATION BAR -->
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./wemanagelogo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> <!--Logo location THIS NEEDS TO BE RESIZED AND THE BG NEEDS TO BE TRANSPARENT-->
-                WeManage
-            </a>
+           
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>                                                     <!--This is for when it shrinks down to phone size-->
@@ -40,14 +36,27 @@
                 <a class="nav-link active" aria-current="page" href="#"><button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button></a> 
                 <!--ADD TASK BUTTON DOES NOT WORK YET also can be restyled since carson is making the buttons-->
             </li>
-            <form class="d-flex ms-auto" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search For Task" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button>                                     <!--EMPTY SEARCH FUNCTION-->
-            </form>
+            
         </div>
         </div>
     </nav>
     
+
+<nav class="navbar shadow-lg navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark" \>
+    <div class="container-fluid">
+      <!-- Horizontal Layout (Kaylynn) -->
+      <div class="d-flex justify-content-between align-items-center w-100">
+        
+          
+        <!-- Right: Search Box (Kaylynn)-->
+        <div class="card shadow-lg p-2">
+          <input type="text" id="skillSearch" class="form-control" placeholder="Search for a task...">
+        </div>
+  
+      </div>
+  
+    </div>
+  </nav>
     <main>
         <div class="row gx-3">
             <!-- Sidebar Column -->
@@ -70,7 +79,7 @@
                     </ul>
                 </div>
             </div>
-
+           
             <!-- Main Content Column -->
             <div class="col-10">
                 <div class="container scrollspy bg-body-tertiary p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
@@ -80,7 +89,7 @@
                                 <div class="card-header">
                                 To-do
                                 </div>
-                                <ul class="list-group list-group-flush">
+                                <ul class="list-group list-group-flush"  id="todoList">
                                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #1 <span class="fs-6">Deadline: 00-00-0000</span></li>
                                 <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #2 <span class="fs-6">Deadline: 00-00-0000</span></li>
                                 <!--Tasks go here-->
@@ -90,7 +99,7 @@
                                 <div class="card-header">
                                 Completed Tasks
                                 </div>
-                                <ul class="list-group list-group-flush">
+                                <ul class="list-group list-group-flush" id="completedList">
                                 <li class="list-group-item completed d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Completed Task <span class="fs-6">Completed: 00-00-0000</span></li>
                                 <!--Completed tasks go here-->
                                 </ul>
@@ -194,7 +203,7 @@
                         Priority: 1
                     </p>
                     <p>
-                        Deadline: 00-00-0000
+                        Deadline: TBD
                     </p>
                 </div>
                 <div class="modal-footer">                    
@@ -207,7 +216,10 @@
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        
+    </script>> <!-- jQuery -->
     <script src="app.js"></script>
-</body>
+
+</body>>
 </html>
