@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // ✏️ Update existing task
         taskBeingEdited.querySelector("strong").innerText = `📋 ${name}`;
         taskBeingEdited.querySelector("small").innerText = description;
-        taskBeingEdited.querySelector(".fs-6").innerText = `📅 ${deadline} |‼️  ${priority}`;
-        taskBeingEdited = null; // Reset
+        taskBeingEdited.querySelector(".fs-6").innerText = `📅 ${deadline} |‼️ ${priority}`;
+        taskBeingEdited = null; // Reset the edit tracker
       } else {
         // ➕ Add new task
         const newTask = document.createElement("li");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <small>${description}</small>
             </div>
             <div class="text-end">
-              <span class="fs-6">📅 ${deadline} |‼️  ${priority}</span>
+              <span class="fs-6">📅 ${deadline} |‼️ ${priority}</span>
               <div class="dropdown d-inline ms-2">
                 <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
                   ⚙️
@@ -68,14 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
           e.stopPropagation();
           taskBeingEdited = newTask;
 
-          /**Read data */
+          /**Collects the data */
           const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
           const taskDesc = newTask.querySelector("small").innerText;
           const taskMeta = newTask.querySelector(".fs-6").innerText;
           const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
-          const priorityMatch = taskMeta.match(/‼️  (.*)/);
+          const priorityMatch = taskMeta.match(/‼️\s*(.*)/);
 
-          /**Add prefill if no choice */
+          // Pre-fill modal
           modalTaskName.value = taskTitle;
           modalTaskDesc.value = taskDesc;
           modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
@@ -86,13 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
 
-      // Reset modal
+      /**Resets the modal */
       modalTaskName.value = "";
       modalTaskDesc.value = "";
       modalDeadline.value = "";
       modalPriority.value = "5";
 
-      const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
+      const modalElement = document.getElementById("addTaskModal");
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
       modalInstance.hide();
     }
   });
