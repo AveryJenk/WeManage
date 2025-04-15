@@ -104,7 +104,7 @@ const tasks = [
     { id: 2, status: 'ongoing' },
     { id: 3, status: 'finished' },
     { id: 4, status: 'ongoing' },
-    { id: 5, status: 'finished' }
+    { id: 5, status: 'overdue' }
 ];
 
 // Function to update statistics
@@ -112,11 +112,12 @@ function updateStats(taskList) {
     const total = taskList.length;
     const finished = taskList.filter(task => task.status === 'finished').length;
     const ongoing = taskList.filter(task => task.status === 'ongoing').length;
-
+    const ongoing = taskList.filter(task => task.status === 'overdue').length;
     // Update the stats in the HTML
     document.getElementById('totalTasks').textContent = total;
     document.getElementById('ongoingTasks').textContent = ongoing;
     document.getElementById('finishedTasks').textContent = finished;
+    document.getElementById('overduetasks').textContent = overdue;
 
     // Update progress bar
     const percent = total > 0 ? Math.round((finished / total) * 100) : 0;
