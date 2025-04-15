@@ -34,3 +34,66 @@ nav {
     background-color: #b68af6; /* For browsers that do not support gradients */
     background-image: linear-gradient( #FFF176,#b68af6, #002bc3);
  }
+ #skillSearch {
+    background-color: #ffffff; 
+    border: 2px solid #4dabf7; 
+    border-radius: 10px;
+    padding: 10px;
+    color: #333; 
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  #skillSearch::placeholder {
+    color: black; 
+    opacity: 1;
+  }
+  
+  #skillSearch:focus {
+    outline: none;
+    border-color: #1e88e5; 
+    box-shadow: 0 0 0 10px rgba(77, 171, 247, 0.25);
+  }
+
+  .custom-navbar {
+    background-color: #6610f2;
+  }
+  .custom-outline-btn {
+    background-color: white;           
+    color: #0d6efd;                   
+    border: 2px solid #0d6efd;        
+    border-radius: 12px;             
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: 0.3s ease;
+  }
+  
+  .custom-outline-btn:hover {
+    background-color: #0d6efd;       
+    color: white;
+  }
+  .main-panel {
+    background-color: transparent; 
+    box-shadow: none;
+  }
+  #todoList .list-group-item {
+    background-color:pink;
+    color: #212529;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+  #completedList .list-group-item.completed {
+    background-color: greenyellow;
+    color: #333;
+    text-decoration: line-through;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+  .card-header {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #343a40;
+  }
+        
