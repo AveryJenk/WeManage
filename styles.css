@@ -97,3 +97,10 @@ nav {
     color: #343a40;
   }
         
+/* Custom highlight color for search matches */
+mark {
+  background-color: #90ee90;
+  color: black;
+  padding: 0 2px;
+  border-radius: 4px;
+}
