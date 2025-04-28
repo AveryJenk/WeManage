@@ -72,9 +72,9 @@ function addTask() {
                 ⚙️
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item edit-task" data-bs-toggle="modal" data-bs-target="#editTaskModal" href="#">✏️ Edit</a></li>
-                <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
-                <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
+                <li><a class="dropdown-item edit-task" data-bs-toggle="modal" data-bs-target="#editTaskModal">✏️ Edit</a></li>
+                <li><a class="dropdown-item delete-task">❌ Delete</a></li>
+                <li><a class="dropdown-item complete-task">✅ Complete</a></li>
               </ul>
             </div>
           </div>
@@ -97,6 +97,7 @@ function addTask() {
         const id = newTask.dataset.taskId;
         taskList[id] = null;
         newTask.remove();
+        localStorage.setItem('taskListKey', JSON.stringify(taskList));
       });
 
       newTask.querySelector(".complete-task").addEventListener("click", (e) => {
@@ -105,26 +106,18 @@ function addTask() {
         if (taskList[id]) taskList[id].completed = true;
         newTask.classList.add("completed");
         document.getElementById("completedList").appendChild(newTask);
+        localStorage.setItem('taskListKey', JSON.stringify(taskList));
       });
 
       newTask.querySelector(".edit-task").addEventListener("click", (e) => {
         e.stopPropagation();
-        taskBeingEdited = newTask;
+        const taskElement = e.target.closest('.list-group-item');
+        if (!taskElement) return;
 
-        /**Read data */
-        const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
-        const taskMeta = newTask.querySelector(".fs-6").innerText;
-        const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
-        const priorityMatch = taskMeta.match(/‼️  (.*)/);
+        const id = taskElement.dataset.taskId;
+        const task = taskList[id];
+        editTaskModalSetup(task)
 
-        /**Add prefill if no choice */
-        modalTaskName.value = taskTitle;
-        modalTaskDesc.value = taskDesc;
-        modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
-        modalPriority.value = priorityMatch ? priorityMatch[1] : "5";
-
-        const modal = new bootstrap.Modal(document.getElementById("addTaskModal"));
-        modal.show();
       });
     }
 
@@ -140,22 +133,25 @@ function addTask() {
     //Will cache the list after every task modification
     localStorage.setItem('taskListKey', JSON.stringify(taskList));
   }
+  localStorage.setItem('taskListKey', JSON.stringify(taskList));
 }
 
-function editTask(name, description, deadline, priority) {
+function editTaskModalSetup(task) {
   // ✏️ Update existing task
-  taskBeingEdited.querySelector("strong").innerText = `📋 ${name}`;
-  taskBeingEdited.querySelector("small").innerText = description;
-  taskBeingEdited.querySelector(".fs-6").innerText = `📅 ${deadline} |‼️  ${priority}`;
+  console.log(task);
 
-  const id = taskBeingEdited.dataset.taskId;
-  if (taskList[id]) {
-    taskList[id].name = name;
-    taskList[id].description = description;
-    taskList[id].deadline = deadline;
-    taskList[id].priority = priority;
-  }
-  taskBeingEdited = null; // Reset
+  const modalTaskName = document.getElementById("taskEditName");
+  const modalTaskDesc = document.getElementById("taskEditDescription");
+  const modalDeadline = document.getElementById("deadlineEdit");
+  const modalPriority = document.getElementById("priorityRangeEdit");
+
+  modalTaskName.value = task.name;
+  modalTaskDesc.value = task.description;
+  modalDeadline.value = task.deadline;
+  modalPriority.value = task.priority;
+
+
+
   localStorage.setItem('taskListKey', JSON.stringify(taskList));
 }
 
@@ -252,9 +248,9 @@ function initializeTasks(task, id) {
             ⚙️
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item edit-task" data-bs-toggle="modal" data-bs-target="#editTaskModal" href="#">✏️ Edit</a></li>
-            <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
-            <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
+            <li><a class="dropdown-item edit-task" data-bs-toggle="modal" data-bs-target="#editTaskModal">✏️ Edit</a></li>
+            <li><a class="dropdown-item delete-task">❌ Delete</a></li>
+            <li><a class="dropdown-item complete-task">✅ Complete</a></li>
           </ul>
         </div>
       </div>
@@ -273,6 +269,7 @@ function initializeTasks(task, id) {
     const id = newTask.dataset.taskId;
     taskList[id] = null;
     newTask.remove();
+    localStorage.setItem('taskListKey', JSON.stringify(taskList));
   });
 
   newTask.querySelector(".complete-task").addEventListener("click", (e) => {
@@ -281,26 +278,17 @@ function initializeTasks(task, id) {
     if (taskList[id]) taskList[id].completed = true;
     newTask.classList.add("completed");
     document.getElementById("completedList").appendChild(newTask);
+    localStorage.setItem('taskListKey', JSON.stringify(taskList));
   });
 
   newTask.querySelector(".edit-task").addEventListener("click", (e) => {
     e.stopPropagation();
-    taskBeingEdited = newTask;
+    const taskElement = e.target.closest('.list-group-item');
+        if (!taskElement) return;
 
-    /**Read data */
-    const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
-    const taskMeta = newTask.querySelector(".fs-6").innerText;
-    const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
-    const priorityMatch = taskMeta.match(/‼️  (.*)/);
-
-    /**Add prefill if no choice */
-    modalTaskName.value = taskTitle;
-    modalTaskDesc.value = taskDesc;
-    modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
-    modalPriority.value = priorityMatch ? priorityMatch[1] : "5";
-
-    const modal = new bootstrap.Modal(document.getElementById("addTaskModal"));
-    modal.show();
+        const id = taskElement.dataset.taskId;
+        const task = taskList[id];
+        editTaskModalSetup(task)
   });
   
   newTask.dataset.taskId = id;
