@@ -1,79 +1,203 @@
-// Checks our JS is working in browser
 console.log("App is working!");
 
+document.addEventListener("DOMContentLoaded", function () {
+  modalAddButton.addEventListener("click", addTask);
 
-class Task { // Task class (Carson)
+  console.log('This is working!');
+  const storedtaskList = localStorage.getItem('taskListKey');
+  if (storedtaskList) {
+    taskList = JSON.parse(storedtaskList).filter(t => t !== null); // Remove null entries
+    
+    // Clear lists
+    todoList.innerHTML = '';
+    completedList.innerHTML = '';
+
+    // Rebuild task list with proper indexes
+    taskList = taskList.map((task, index) => {
+      const newTask = { ...task, id: index }; // Create new ID system
+      initializeTasks(newTask, index);
+      return newTask;
+      
+      
+    });
+  }
+});
+
+    if (name !== "") {
+      if (taskBeingEdited) {
+        // ✏️ Update existing task
+        taskBeingEdited.querySelector("strong").innerText = `📋 ${name}`;
+        taskBeingEdited.querySelector("small").innerText = description;
+        taskBeingEdited.querySelector(".fs-6").innerText = `📅 ${deadline} |‼️ ${priority}`;
+        taskBeingEdited = null; // Reset the edit tracker
+      } else {
+        // ➕ Add new task
+        const newTask = document.createElement("li");
+        newTask.className = "list-group-item list-group-item-action";
+
+        newTask.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <div>
+              <strong>📋 ${name}</strong><br>
+              <small>${description}</small>
+            </div>
+            <div class="text-end">
+              <span class="fs-6">📅 ${deadline} |‼️ ${priority}</span>
+              <div class="dropdown d-inline ms-2">
+                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  ⚙️
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item edit-task" href="#">✏️ Edit</a></li>
+                  <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
+                  <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
+                </ul>
+              </div>
+//Initialize the task class for caching
+class Task {
   constructor(name, description, deadline, priority, completedState) {
-    this.name = name;
-    this.description = description;
-    this.deadline = deadline;
-    this.priority = priority;
-    this.completed = completedState;
+      this.name = name;
+      this.description = description;
+      this.deadline = deadline;
+      this.priority = priority;
+      this.completed = completedState;
   }
 }
+let taskNum = 0; //Allows for dynamic task naming numerically
+let taskList = []; // This will store all our task objects
 
-let taskList = []; // Holds all task objects (Kaylynn)
-const todoList = document.getElementById("todoList"); // To Do List container (Kaylynn)
-const completedList = document.getElementById("completedList"); // Completed List container (Kaylynn)
-const modalAddButton = document.querySelector("#addTaskModal .skillAdd"); // Add Task button inside modal (Carson)
-const modalTaskName = document.getElementById("taskInputName"); // Task Name input (Kaylynn)
-const modalTaskDesc = document.getElementById("taskInputDescription"); // Task Description input (Kaylynn)
-const modalDeadline = document.getElementById("deadlineInput"); // Task Deadline input (Kaylynn)
-const modalPriority = document.getElementById("priorityRange"); // Task Priority input (Kaylynn)
-let taskBeingEdited = null; // Track which task is being edited (Carson)
+const todoList = document.getElementById("todoList");
+const completedList = document.getElementById("completedList");
+const modalAddButton = document.querySelector("#addTaskModal .skillAdd");
+const modalTaskName = document.getElementById("taskInputName");
+const modalTaskDesc = document.getElementById("taskInputDescription");
+const modalDeadline = document.getElementById("deadlineInput");
+const modalPriority = document.getElementById("priorityRange");
+let taskBeingEdited = null; // Track which task is being edited
 
 
-// FUNCTIONS
-function addTask() { // Adds a new task (Avery)
+
+function addTask() {
   const name = modalTaskName.value.trim();
   const description = modalTaskDesc.value.trim();
   const deadline = modalDeadline.value || "TBD";
   const priority = modalPriority.value;
 
-  if (!name) return; // Don't add if name is empty
-
-  if (taskBeingEdited) {
-    editTask(name, description, deadline, priority);
-  } else {
-    const newTask = document.createElement("li");
-    newTask.className = "list-group-item list-group-item-action";
-    newTask.innerHTML = `
-      <div class="d-flex justify-content-between align-items-center w-100">
-        <div>
-          <strong>📋 ${name}</strong><br>
-          <small>${description}</small>
-        </div>
-        <div class="text-end">
-          <span class="fs-6">📅 ${deadline} |‼️ ${priority}</span>
-          <div class="dropdown d-inline ms-2">
-            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">⚙️</button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item edit-task" href="#">✏️ Edit</a></li>
-              <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
-              <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
-            </ul>
+  if (name) {
+    if (taskBeingEdited) {
+      editTask(name, description, deadline, priority);
+    } else {
+      // ➕ Add new task
+      const newTask = document.createElement("li");
+      newTask.className = "list-group-item list-group-item-action";
+      newTask.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div>
+            <strong>📋 ${name}</strong><br>
+          </div>
+          <div class="text-end">
+            <span class="fs-6">📅 ${deadline} |‼️  ${priority}</span>
+            <div class="dropdown d-inline ms-2">
+              <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                ⚙️
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item edit-task" href="#">✏️ Edit</a></li>
+                <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
+                <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
 
-    todoList.appendChild(newTask);
+      todoList.appendChild(newTask);
 
-    const taskObj = new Task(name, description, deadline, priority, false);
-    taskList.push(taskObj);
-    newTask.dataset.taskId = taskList.length - 1;
+      const taskObj = new Task(name, description, deadline, priority, false);
+      taskList.push(taskObj);
+      newTask.dataset.taskId = taskList.length - 1;
 
-    setupTaskListeners(newTask); // Set up dropdown actions (Carson)
+      /** This is for the dropdown options for tasks */
+      newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+      
+      newTask.querySelector(".delete-task").addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = newTask.dataset.taskId;
+        taskList[id] = null;
+        newTask.remove();
+      });
+
+      newTask.querySelector(".complete-task").addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = newTask.dataset.taskId;
+        if (taskList[id]) taskList[id].completed = true;
+        newTask.classList.add("completed");
+        document.getElementById("completedList").appendChild(newTask);
+      });
+
+          /**Collects the data */
+          const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
+          const taskDesc = newTask.querySelector("small").innerText;
+          const taskMeta = newTask.querySelector(".fs-6").innerText;
+          const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
+          const priorityMatch = taskMeta.match(/‼️\s*(.*)/);
+
+          // Pre-fill modal
+          modalTaskName.value = taskTitle;
+          modalTaskDesc.value = taskDesc;
+          modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
+          modalPriority.value = priorityMatch ? priorityMatch[1] : "5";
+      newTask.querySelector(".edit-task").addEventListener("click", (e) => {
+        e.stopPropagation();
+        taskBeingEdited = newTask;
+
+        /**Read data */
+        const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
+        const taskMeta = newTask.querySelector(".fs-6").innerText;
+        const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
+        const priorityMatch = taskMeta.match(/‼️  (.*)/);
+
+        /**Add prefill if no choice */
+        modalTaskName.value = taskTitle;
+        modalTaskDesc.value = taskDesc;
+        modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
+        modalPriority.value = priorityMatch ? priorityMatch[1] : "5";
+
+      /**Resets the modal */
+      modalTaskName.value = "";
+      modalTaskDesc.value = "";
+      modalDeadline.value = "";
+      modalPriority.value = "5";
+
+      const modalElement = document.getElementById("addTaskModal");
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      modalInstance.hide();
+        const modal = new bootstrap.Modal(document.getElementById("addTaskModal"));
+        modal.show();
+      });
+    }
+
+    // Reset modal
+    modalTaskName.value = "";
+    modalTaskDesc.value = "";
+    modalDeadline.value = "";
+    modalPriority.value = "5";
+
+    const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
+    modalInstance.hide();
+
+    //Will cache the list after every task modification
     localStorage.setItem('taskListKey', JSON.stringify(taskList));
   }
-
-  resetModal(); // Clear modal after adding task (Carson)
 }
 
-function editTask(name, description, deadline, priority) { // Edits an existing task (Avery)
+function editTask(name, description, deadline, priority) {
+  // ✏️ Update existing task
   taskBeingEdited.querySelector("strong").innerText = `📋 ${name}`;
   taskBeingEdited.querySelector("small").innerText = description;
-  taskBeingEdited.querySelector(".fs-6").innerText = `📅 ${deadline} |‼️ ${priority}`;
+  taskBeingEdited.querySelector(".fs-6").innerText = `📅 ${deadline} |‼️  ${priority}`;
 
   const id = taskBeingEdited.dataset.taskId;
   if (taskList[id]) {
@@ -82,32 +206,89 @@ function editTask(name, description, deadline, priority) { // Edits an existing 
     taskList[id].deadline = deadline;
     taskList[id].priority = priority;
   }
-
-  taskBeingEdited = null;
+  taskBeingEdited = null; // Reset
   localStorage.setItem('taskListKey', JSON.stringify(taskList));
-  resetModal();
 }
 
-function openTaskModal(task) { // Opens the "View Task" modal (Avery)
+function openTaskModal(task) {
   const modal = new bootstrap.Modal(document.getElementById('taskModal'));
   const now = new Date();
   const deadlineDate = new Date(task.deadline);
-
+  
   document.getElementById('viewTaskModalLabel').textContent = task.name;
-  document.getElementById('taskModalDeadlineState').textContent = task.completed ? 'Completed' : (deadlineDate < now ? 'Overdue' : 'Ongoing');
-
+  document.getElementById('taskModalDeadlineState').textContent = 
+      task.completed ? 'Completed' : (deadlineDate < now ? 'Overdue' : 'Ongoing');
+  
   const modalBody = document.querySelector('#taskModal .modal-body');
   modalBody.innerHTML = `
-    <p>${task.description}</p>
-    <hr>
-    <p>Priority: ${task.priority}/10</p>
-    <p>Deadline: ${task.deadline === "TBD" ? "No deadline" : task.deadline}</p>
+      <p>${task.description}</p>
+      <hr>
+      <p>Priority: ${task.priority}/10</p>
+      <p>Deadline: ${task.deadline === "TBD" ? "No deadline" : task.deadline}</p>
   `;
 
   modal.show();
 }
 
-function initializeTasks(task, id) { // Rebuilds tasks from localStorage (Avery)
+document.getElementById('todoList').addEventListener('click', (event) => {
+  const taskElement = event.target.closest('.list-group-item');
+  if (!taskElement) return;
+
+  const id = taskElement.dataset.taskId;
+  const task = taskList[id];
+  
+  if (task) {
+    openTaskModal(task);
+  }
+});
+
+document.getElementById('completedList').addEventListener('click', (event) => {
+  const taskElement = event.target.closest('.list-group-item');
+  if (!taskElement) return;
+  
+  const id = taskElement.dataset.taskId;
+  const task = taskList[id];
+  
+  if (task) {
+    openTaskModal(task);
+  }
+});
+
+// Sample data for tasks
+const tasks = [
+    { id: 1, status: 'finished' },
+    { id: 2, status: 'ongoing' },
+    { id: 3, status: 'finished' },
+    { id: 4, status: 'ongoing' },
+    { id: 5, status: 'overdue' }
+];
+
+// Function to update statistics
+function updateStats(taskList) {
+    const total = taskList.length;
+    const finished = taskList.filter(task => task.status === 'finished').length;
+    const ongoing = taskList.filter(task => task.status === 'ongoing').length;
+    const overdue = taskList.filter(task => task.status === 'overdue').length;
+    // Update the stats in the HTML
+    document.getElementById('totalTasks').textContent = total;
+    document.getElementById('ongoingTasks').textContent = ongoing;
+    document.getElementById('finishedTasks').textContent = finished;
+    document.getElementById('overduetasks').textContent = overdue;
+
+    // Update progress bar
+    const percent = total > 0 ? Math.round((finished / total) * 100) : 0;
+    const progressBar = document.getElementById('progressBar');
+
+    progressBar.style.width = percent + '%';
+    progressBar.setAttribute('aria-valuenow', percent);
+    progressBar.textContent = percent + '%';
+};
+
+
+updateStats(tasks);
+
+
+function initializeTasks(task, id) {
   const newTask = document.createElement("li");
   newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
   newTask.innerHTML = `
@@ -118,7 +299,9 @@ function initializeTasks(task, id) { // Rebuilds tasks from localStorage (Avery)
       <div class="text-end">
         <span class="fs-6">📅 ${task.deadline} |‼️ ${task.priority}</span>
         <div class="dropdown d-inline ms-2">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">⚙️</button>
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            ⚙️
+          </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item edit-task" href="#">✏️ Edit</a></li>
             <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
@@ -131,20 +314,16 @@ function initializeTasks(task, id) { // Rebuilds tasks from localStorage (Avery)
 
   const targetList = task.completed ? completedList : todoList;
   targetList.appendChild(newTask);
-  newTask.dataset.taskId = id;
 
-  setupTaskListeners(newTask);
-}
-
-function setupTaskListeners(newTask) { // Adds event listeners to each task (Carson)
-  newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => e.stopPropagation());
-
+  newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+  
   newTask.querySelector(".delete-task").addEventListener("click", (e) => {
     e.stopPropagation();
     const id = newTask.dataset.taskId;
     taskList[id] = null;
     newTask.remove();
-    localStorage.setItem('taskListKey', JSON.stringify(taskList));
   });
 
   newTask.querySelector(".complete-task").addEventListener("click", (e) => {
@@ -152,20 +331,20 @@ function setupTaskListeners(newTask) { // Adds event listeners to each task (Car
     const id = newTask.dataset.taskId;
     if (taskList[id]) taskList[id].completed = true;
     newTask.classList.add("completed");
-    completedList.appendChild(newTask);
-    localStorage.setItem('taskListKey', JSON.stringify(taskList));
+    document.getElementById("completedList").appendChild(newTask);
   });
 
   newTask.querySelector(".edit-task").addEventListener("click", (e) => {
     e.stopPropagation();
     taskBeingEdited = newTask;
 
+    /**Read data */
     const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
-    const taskDesc = newTask.querySelector("small").innerText;
     const taskMeta = newTask.querySelector(".fs-6").innerText;
     const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
-    const priorityMatch = taskMeta.match(/‼️\s*(.*)/);
+    const priorityMatch = taskMeta.match(/‼️  (.*)/);
 
+    /**Add prefill if no choice */
     modalTaskName.value = taskTitle;
     modalTaskDesc.value = taskDesc;
     modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
@@ -174,72 +353,6 @@ function setupTaskListeners(newTask) { // Adds event listeners to each task (Car
     const modal = new bootstrap.Modal(document.getElementById("addTaskModal"));
     modal.show();
   });
+  
+  newTask.dataset.taskId = id;
 }
-
-function resetModal() { // Resets modal input fields after task submission (Carson)
-  modalTaskName.value = "";
-  modalTaskDesc.value = "";
-  modalDeadline.value = "";
-  modalPriority.value = "5";
-  const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
-  if (modalInstance) modalInstance.hide();
-}
-
-function searchTasks() { // Task Search Function with Highlight and Smooth Scroll (Kaylynn)
-  const searchInput = document.getElementById('skillSearch');
-  const filter = searchInput.value.trim().toLowerCase();
-
-  const allTasks = document.querySelectorAll('#todoList .list-group-item, #completedList .list-group-item');
-  let firstMatch = null;
-
-  allTasks.forEach(task => {
-    const titleElement = task.querySelector('strong');
-    if (!titleElement) return;
-
-    const originalText = titleElement.textContent.replace('📋', '').trim();
-    const lowerOriginalText = originalText.toLowerCase();
-
-    if (lowerOriginalText.includes(filter) && filter !== "") {
-      task.style.display = '';
-      const highlightedText = originalText.replace(new RegExp(filter, 'gi'), (match) => `<mark>${match}</mark>`);
-      titleElement.innerHTML = `📋 ${highlightedText}`;
-
-      if (!firstMatch) {
-        firstMatch = task;
-      }
-    } else if (filter === "") {
-      task.style.display = '';
-      titleElement.innerHTML = `📋 ${originalText}`;
-    } else {
-      task.style.display = 'none';
-      titleElement.innerHTML = `📋 ${originalText}`;
-    }
-  });
-
-  // After highlighting, scroll smoothly to match
-  if (firstMatch) {
-    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-}
-
-
-// DOMContentLoaded Event (Kaylynn) this makes the task added be found when searched for 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log('This is working!');
-
-  modalAddButton.addEventListener("click", addTask);
-  document.getElementById('skillSearch').addEventListener('input', searchTasks);
-
-  const storedtaskList = localStorage.getItem('taskListKey');
-  if (storedtaskList) {
-    taskList = JSON.parse(storedtaskList).filter(t => t !== null);
-    todoList.innerHTML = '';
-    completedList.innerHTML = '';
-
-    taskList = taskList.map((task, index) => {
-      const newTask = { ...task, id: index };
-      initializeTasks(newTask, index);
-      return newTask;
-    });
-  }
-});
