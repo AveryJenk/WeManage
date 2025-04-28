@@ -1,253 +1,502 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' type='text/css'>
+
     <!-- If we want more/other fonts add them here -->
+
     <link href="./styles.css" rel="stylesheet">
+
     <title>Task Managment Application</title>
+
 </head>
-<div class="row text-dark align-items-center"> <!--This section holds our logo and brand statement (Kaylynn)-->
+
+<body class="p-0">
+
+<div class="row text-dark align-items-center" style="margin-right: 0px"> <!--This section holds our logo and brand statement (Kaylynn)-->
+
     <div class="col-md-4 text-start">
+
         <a class="navbar-brand" href="#">
+
             <img src="./images/wemanagelogotransparent.png" alt="Logo" width="200" height="auto" class="img-fluid">
+
         </a>
+
     </div>
+
     <div class="col-md-8 text-center">
+
         <h1>WeManage – Your Home to Organize. Prioritize. Achieve.</h1>
+
     </div>
+
 </div>  
-    
+
+
+
 <nav class="navbar shadow-lg navbar-expand-lg navbar custom-navbar sticky-top"> <!-- NAVIGATION BAR -->
+
     <div class="container-fluid">
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+
             <span class="navbar-toggler-icon"></span>
+
         </button>                                                     <!--This is for when it shrinks down to phone size-->
+
         <div class="collapse navbar-collapse" id="navbarColor01">
-            <li class="nav-item">
-                <button class="btn custom-outline-btn" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
-                <!--ADD TASK BUTTON DOES NOT WORK YET also can be restyled since carson is making the buttons-->
-            </li>
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+
+                    <button class="btn custom-outline-btn" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
+
+                    <!--ADD TASK BUTTON DOES NOT WORK YET also can be restyled since carson is making the buttons-->
+
+                </li>
+
+            </ul>
+
             <!-- Right: Search Box (Kaylynn)-->
+
             <div class="card shadow-lg ms-auto p-2 ">
+
                 <input type="text" id="skillSearch" class="form-control" placeholder="Search for a task...">
+
             </div>
+
         </div>
+
     </div>
+
 </nav>
 
+
+
     <main>
-        <div class="row gx-3">
+
+        <div class="row gx-3" style="margin-right: 0px">
+
             <!-- Sidebar Column -->
+
             <div class="col-2">
-                <div class="ms-1 mt-3 sticky-top bg-light bg-gradient rounded-2" style="top: 75px;"> <!-- Style top should be changed based on height of the navbar but idk how to do that so i just eyeballed it -AJ -->
+
+                <div class="ms-1 mt-3 sticky-top bg-light bg-gradient rounded-2" style="top: 85px;"> <!-- Style top should be changed based on height of the navbar but idk how to do that so i just eyeballed it -AJ -->
+
                     <ul class="list-group list-group-flush">
+
                         <li class="list-group-item bg-dark text-light bg-gradient"> Sort <img src="./images/sort-by.svg" alt="Sort-By" width="30" height="24" class="d-inline-block align-text-top"></li>
+
                         <li class="list-group-item">
+
                         <input class="form-check-input me-1" type="radio" name="listGroupSort" value="" id="alphabeticalSort" checked>
+
                         <label class="form-check-label" for="alphabeticalSort"> A-Z </label>
+
                         </li>
+
                         <li class="list-group-item">
+
                         <input class="form-check-input me-1" type="radio" name="listGroupSort" value="" id="prioritySort">
+
                         <label class="form-check-label" for="prioritySort"> Priority </label>
+
                         </li>
+
                         <li class="list-group-item">
+
                         <input class="form-check-input me-1" type="radio" name="listGroupSort" value="" id="deadlineSort">
+
                         <label class="form-check-label" for="deadlineSort">Closest Deadline</label>
+
                         </li>
+
                     </ul>
+
                 </div>
+
             </div>
-           
-            <!-- Main Content Column -->
-            
-            <div class="col-10">
-          <!-- Main Content Column -->
-            <div class="col-10">
-
-                <!--Statistics-->
-                    <div class="container p-3 mb-4 rounded-2 bg-light d-flex flex-column align-items-center">
-                    <h2 class="mb-3">Statistics</h2>
-                        <div class="row text-center mb-4">
-                        <div class="col-md-4 mb-3">
-                            <div class="p-3 bg-warning text-dark rounded">
-                                <h4>Total Tasks</h4>
-                                <p id="totalTasks">0</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="p-3 bg-primary text-light rounded">
-                                <h4>Ongoing Tasks</h4>
-                                <p id="ongoingTasks">0</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <div class="p-3 bg-success text-light rounded">
-                                <h4>Finished Tasks</h4>
-                                <p id="finishedTasks">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Progress Bar-->
-                    <h5>Overall Progress</h5>
-                   <div class="progress">
-                        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                    </div>
-                </div>
 
 
-            
+
+           <!-- Main Content Column -->
+
             <div class="col-10">
+
                 <div class="container scrollspy main-panel p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card col-12 my-5">
-                                <div class="card-header">
-                        To Do 📌
-                                <body class="p-4">
-   
-                                    
-                        
-                                </div>
-                                <ul class="list-group list-group-flush"  id="todoList">
-                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #1 <span class="fs-6">Deadline: 00-00-0000</span></li>
-                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Task #2 <span class="fs-6">Deadline: 00-00-0000</span></li>
-                                <!--Tasks go here-->
-                                </ul>
-                            </div> 
-                            <div class="card col-12 my-5">
-                                <div class="card-header">
-                                Completed Tasks✅
-                                </div>
-                                <ul class="list-group list-group-flush" id="completedList">
-                                <li class="list-group-item completed d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#taskModal">Completed Task <span class="fs-6">Completed: 00-00-0000</span></li>
-                                <!--Completed tasks go here-->
-                                </ul>
-                            </div>
-                            <div class="card col-12 my-5">
-                                <p>This is for testing the stickiness of sticky things. This will not be in the final product. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere semper purus quis interdum. Aenean tempor consequat tincidunt. Vivamus laoreet sollicitudin libero, quis porttitor magna facilisis a. Donec tincidunt leo at nisi laoreet, at hendrerit arcu dignissim. Integer lobortis eu urna luctus congue. Proin facilisis est quis malesuada placerat. In laoreet, enim sit amet bibendum pulvinar, lacus turpis dapibus elit, id viverra diam diam vel lacus. Duis mollis lacus tortor, quis tincidunt ligula suscipit quis. Nullam sollicitudin mattis elit quis pellentesque. Phasellus diam tortor, fringilla et nibh in, semper semper ex.
 
-                                    Vivamus dignissim ex dictum, condimentum lectus a, imperdiet mauris. Nunc condimentum nunc et pretium fringilla. Suspendisse lobortis, odio aliquam semper fringilla, sapien neque porttitor orci, et imperdiet erat lectus vitae justo. Duis a libero enim. Nunc fermentum nunc vel diam iaculis lobortis. Ut dapibus pellentesque velit eu maximus. Maecenas id urna nulla. Nunc vestibulum porttitor massa. Donec sapien ante, vehicula at justo eu, porttitor aliquet erat. Proin ullamcorper quam quis risus eleifend, ac pellentesque nunc placerat. Aliquam bibendum ut nisi ac condimentum. Cras malesuada, felis vitae commodo efficitur, nulla ex cursus neque, eget convallis tortor sapien vel turpis.
-                                    
-                                    Donec condimentum, erat sit amet hendrerit eleifend, massa odio dapibus urna, vel ultricies nulla odio vitae ante. Nulla ullamcorper nisi vel sem tristique tempor. Praesent ligula nisi, tempus a pellentesque id, bibendum sed magna. Aenean hendrerit purus nec eros sodales suscipit. Praesent suscipit pharetra mattis. Nullam elementum nisl aliquam finibus facilisis. Morbi porta lacus felis, consectetur sodales nisl ornare id. Aenean ac sodales elit. Phasellus et consequat sapien, id tincidunt sapien. Sed sed ornare nisi.
-                                    
-                                    Nullam dui risus, aliquet ac eros sed, volutpat vestibulum velit. Aliquam blandit mi eu orci dapibus, in ornare nulla porttitor. Etiam posuere quis tellus vitae feugiat. Integer volutpat varius pharetra. Maecenas lorem purus, tincidunt a rhoncus nec, vehicula ac sem. Nunc dictum pretium ante eu molestie. Cras ac lacinia diam, sit amet egestas erat. Fusce suscipit scelerisque est, ut iaculis dolor laoreet nec. Phasellus facilisis enim risus. Vivamus vel commodo tortor, nec tempor nisi. Suspendisse eu maximus nulla. Curabitur sit amet magna nunc. Vivamus molestie dignissim est ac tristique.
-                                    
-                                    Ut pulvinar neque id mi interdum mollis. Proin lobortis nisi id euismod elementum. Vestibulum porttitor non dolor sit amet egestas. Aenean pulvinar elementum vehicula. Vestibulum aliquam mattis orci ut ullamcorper. Aliquam erat volutpat. Integer tempor mauris sit amet nulla eleifend, pharetra tincidunt turpis feugiat. Phasellus maximus elit dolor, a tempus diam molestie vel. Aliquam est nulla, consectetur eget mi ut, scelerisque aliquam sem. Etiam ac scelerisque ex. Vivamus a dictum ex, vel pretium dui. Phasellus mattis neque id dolor ullamcorper, luctus pellentesque urna cursus. Morbi vitae elit odio.
-                                    
-                                    Pellentesque egestas semper lacus, ac commodo tellus convallis ut. Nam egestas mattis auctor. Praesent convallis risus nec accumsan feugiat. Praesent accumsan eros a feugiat interdum. Proin elementum in magna non pellentesque. Cras sed arcu ac eros maximus maximus a eu velit. Donec in ultrices metus. Nulla facilisi.
-                                    
-                                    Phasellus lorem diam, luctus vestibulum elit nec, aliquet efficitur magna. Donec efficitur at nibh sollicitudin efficitur. Quisque pellentesque nisl a orci fermentum vehicula. Mauris ut ultrices felis. Phasellus scelerisque, ex vel molestie imperdiet, arcu ex sagittis risus, a efficitur velit elit facilisis diam. Pellentesque interdum sagittis lectus efficitur hendrerit. Maecenas sed sem elementum, consectetur quam non, hendrerit turpis. Mauris ac diam id magna malesuada bibendum.
-                                    
-                                    In hac habitasse platea dictumst. Cras sapien lacus, porta eu leo et, tristique dignissim eros. Cras a erat molestie, dictum ligula at, tempor nisi. Praesent gravida, dolor et hendrerit tempor, arcu mauris fringilla ipsum, nec euismod eros nisi vel urna. Suspendisse elementum auctor ligula, in iaculis tortor commodo ut. Cras nec dictum magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla porttitor vestibulum erat a bibendum. Vestibulum imperdiet, mauris in condimentum tincidunt, dolor diam imperdiet felis, id luctus dui orci ultricies tortor. Nunc tellus nunc, semper vitae viverra eget, lacinia nec lectus. Nunc ac ante in ex sollicitudin scelerisque. Phasellus porttitor arcu nulla, non vehicula turpis congue ut. Sed sed rutrum massa, nec viverra felis. </p>
-                            </div>   
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div class="card col-12 my-5">
+
+                                <div class="card-header">
+
+                                    <!--Statistics-->
+
+                <div class="container p-3 mb-3 rounded-2 bg-light">
+
+                    <h2 class="mb-3">Statistics</h2>
+
+                    <div class="row text-center mb-3">
+
+                        <div class="col-md-3 mb-3">
+
+                            <div class="p-3 bg-warning text-dark rounded">
+
+                                <h4>Total Tasks</h4>
+
+                                <p id="totalTasks">0</p>
+
+                            </div>
+
                         </div>
+
+                        <div class="col-md-3 mb-3">
+
+                            <div class="p-3 bg-primary text-dark rounded">
+
+                                <h4>Ongoing Tasks</h4>
+
+                                <p id="ongoingTasks">0</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+
+                            <div class="p-3 bg-danger text-dark rounded">
+
+                                <h4>Overdue Tasks</h4>
+
+                                <p id="overdueTasks">0</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+
+                            <div class="p-3 bg-success text-dark rounded">
+
+                                <h4>Finished Tasks</h4>
+
+                                <p id="finishedTasks">0</p>
+
+                            </div>
+
+                        </div>
+
                     </div>
+
+                    <!--Progress Bar-->
+
+                    <h5>Overall Progress</h5>
+
+                    <div class="progress">
+
+                        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+
+                    </div>
+
                 </div>
+
+
+
+                </div>
+
+                </div>
+
+                            <div class="card col-12 my-5">
+
+                                <div class="card-header">
+
+                        To Do 📌
+
+                                <body class="p-4">
+
+
+
+
+
+
+
+                                </div>
+
+                                <ul class="list-group list-group-flush"  id="todoList">
+
+
+
+                                <!--Tasks go here-->
+
+
+                                <!-- <li class="list-group-item list-group-item-action"> No tasks yet! </li> -->
+
+                                </ul>
+
+                            </div> 
+
+                            <div class="card col-12 my-5">
+
+                                <div class="card-header">
+
+                                Completed Tasks✅
+
+                                </div>
+
+                                <ul class="list-group list-group-flush" id="completedList">
+
+
+                                <!--Completed tasks go here-->
+
+
+                                <!-- <li class="list-group-item list-group-item-action"> Complete A Task! </li> -->
+
+                                </ul>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
+
     </main>
 
+</body>
+
+
+
            <!-- ALL MODALS BELOW THIS POINT-->
+
     <!-- NONE OF THE FORMS ACTUALLY INPUT ANYWHERE-->
 
+
+
     <!-- Add task modal ALSO WILL BE EDIT MODAL JUST NEEDS JS IMPLEMENTATION -->
+
     <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true"> 
+
         <div class="modal-dialog modal-dialog-centered">
+
             <div class="modal-content">
+
                 <div class="modal-header">
+
                     <h1 class="taskModalTitle modal-title fs-5" id="taskModalLabel">Add a New Task</h1>
+
                 </div>
+
                 <div class="modal-body">
+
                     <label for="taskInputName" class="form-label">Task Name✏️</label>
+
                     <div class="input-group mb-3">
+
                         <input type="text" id="taskInputName" class="form-control" placeholder="Task Name" aria-label="Task Name" aria-describedby="basic-addon1">
+
                     </div>          
+
                     <hr>      
+
                     <label for="taskInputDescription" class="form-label">Task Description📝</label>                           
+
                     <div class="input-group mb-3">
+
                         <textarea class="form-control" id="taskInputDescription" placeholder="Task Description" aria-label="Task Description"></textarea>
+
                     </div>
+
                     <hr>
+
                     <div class="input-group mb-3">
+
                         <label for="deadlineInput">Deadline 📅:</label>
+
                         <input type="date" id="deadlineInput" name="deadline" class="ms-4 rounded-2"
+
                         value="0000-00-00"/> <!-- WHEN CODE IMPLEMENTED CHANGE TO CURRENT DATE-->
+
                     </div>
+
                     <hr>
+
                     <div class="input-group mb-3">
+
                         <label for="priorityRange" class="form-label">Priority ⚠️</label>
+
                         <div class="d-flex flex-column w-100">
+
                             <input type="range" class="form-range" id="priorityRange"
+
                                    min="1" 
+
                                    max="10" 
+
                                    value="5">
+
                             <div class="d-flex justify-content-between mt-1 ms-2">
+
                                 <span class="text-muted" style="font-size: 0.8rem">1</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">2</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">3</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">4</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">5</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">6</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">7</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">8</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">9</span>
+
                                 <span class="text-muted" style="font-size: 0.8rem">10</span>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
                 <div class="modal-footer">
+
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>                                                        
+
                     <button type="button" class="btn btn-primary skillAdd">Add Task</button>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <!-- View Task Modal -->
+
     <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-centered">
+
             <div class="modal-content">
+
                 <div class="modal-header d-flex align-items-center gap-3">
-                    <h1 class="taskModalTitle modal-title fs-5 mb-0" id="taskModalLabel">Task Title</h1>
+
+
+                    <h1 class="taskModalTitle modal-title fs-5 mb-0" id="viewTaskModalLabel">Task Title placeholder</h1>
+
                     <div class="flex-grow-1 border-bottom border-2 border-secondary opacity-50"></div>
-                    <h1 class="taskModalDeadlineState modal-title fs-5 mb-0" id="taskModalDeadlineState"> Ongoing </h1>
+
+
+                    <h1 class="taskModalDeadlineState modal-title fs-5 mb-0" id="taskModalDeadlineState"> placeholder ongoing </h1>
+
                 </div>
+
                 <div class="modal-body">
+
                     <p>
+
                         Vivamus dignissim ex dictum, condimentum lectus a, imperdiet mauris. Nunc condimentum nunc et pretium fringilla. Suspendisse lobortis, odio aliquam semper fringilla, sapien neque porttitor orci, et imperdiet erat lectus vitae justo. Duis a libero enim. Nunc fermentum nunc vel diam iaculis lobortis. Ut dapibus pellentesque velit eu maximus. Maecenas id urna nulla. Nunc vestibulum porttitor massa. Donec sapien ante, vehicula at justo eu, porttitor aliquet erat. Proin ullamcorper quam quis risus eleifend, ac pellentesque nunc placerat. Aliquam bibendum ut nisi ac condimentum. Cras malesuada, felis vitae commodo efficitur, nulla ex cursus neque, eget convallis tortor sapien vel turpis.
+
                     </p>
+
                     <hr>
+
                     <p>
+
                         Priority: 1
+
                     </p>
+
                     <p>
+
                         Deadline: TBD
+
                     </p>
+
                 </div>
+
                 <div class="modal-footer">                    
-                    
-                    <button type="button" class="btn btn-danger">Delete</button>
-                    <button type="button" class="btn btn-warning">Edit</button>
+
+
+
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                                        
 
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        
-    </script>> <!-- jQuery -->
+
+
+
+    </script> <!-- jQuery -->
+
     <script src="app.js"></script>
 
-</body>>
+
+
+
+
 </html>
