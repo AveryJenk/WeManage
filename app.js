@@ -23,9 +23,23 @@ document.addEventListener("DOMContentLoaded", function () {
       newTask.setAttribute("data-bs-target", "#taskModal");
 
       newTask.innerHTML = `
-        <div>
-          <strong>${name}</strong><br>
-          <small>${description}</small>
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <div>
+            <strong>📋 ${name}</strong><br>
+          </div>
+          <div class="text-end">
+            <span class="fs-6">📅 ${deadline} |‼️  ${priority}</span>
+            <div class="dropdown d-inline ms-2">
+              <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                ⚙️
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item edit-task"  data-bs-toggle="modal" data-bs-target="#editTaskModal" href="#">✏️ Edit</a></li>
+                <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
+                <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
         <span class="fs-6">Deadline: ${deadline} | Priority: ${priority}</span>
       `;
@@ -105,3 +119,73 @@ function updateStats(taskList) {
 }
 
 updateStats(tasks);
+
+
+function initializeTasks(task, id) {
+  const newTask = document.createElement("li");
+  newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
+  newTask.innerHTML = `
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <div>
+        <strong>📋 ${task.name}</strong><br>
+      </div>
+      <div class="text-end">
+        <span class="fs-6">📅 ${task.deadline} |‼️ ${task.priority}</span>
+        <div class="dropdown d-inline ms-2">
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            ⚙️
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item edit-task" href="#">✏️ Edit</a></li>
+            <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
+            <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const targetList = task.completed ? completedList : todoList;
+  targetList.appendChild(newTask);
+
+  newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+  
+  newTask.querySelector(".delete-task").addEventListener("click", (e) => {
+    e.stopPropagation();
+    const id = newTask.dataset.taskId;
+    taskList[id] = null;
+    newTask.remove();
+  });
+
+  newTask.querySelector(".complete-task").addEventListener("click", (e) => {
+    e.stopPropagation();
+    const id = newTask.dataset.taskId;
+    if (taskList[id]) taskList[id].completed = true;
+    newTask.classList.add("completed");
+    document.getElementById("completedList").appendChild(newTask);
+  });
+
+  newTask.querySelector(".edit-task").addEventListener("click", (e) => {
+    e.stopPropagation();
+    taskBeingEdited = newTask;
+
+    /**Read data */
+    const taskTitle = newTask.querySelector("strong").innerText.replace("📋 ", "");
+    const taskMeta = newTask.querySelector(".fs-6").innerText;
+    const deadlineMatch = taskMeta.match(/📅 (.*?) \|/);
+    const priorityMatch = taskMeta.match(/‼️  (.*)/);
+
+    /**Add prefill if no choice */
+    modalTaskName.value = taskTitle;
+    modalTaskDesc.value = taskDesc;
+    modalDeadline.value = deadlineMatch ? deadlineMatch[1] : "";
+    modalPriority.value = priorityMatch ? priorityMatch[1] : "5";
+
+    const modal = new bootstrap.Modal(document.getElementById("addTaskModal"));
+    modal.show();
+  });
+  
+  newTask.dataset.taskId = id;
+}

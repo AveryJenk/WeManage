@@ -119,9 +119,8 @@
     </main>
 
            <!-- ALL MODALS BELOW THIS POINT-->
-    <!-- NONE OF THE FORMS ACTUALLY INPUT ANYWHERE-->
 
-    <!-- Add task modal ALSO WILL BE EDIT MODAL JUST NEEDS JS IMPLEMENTATION -->
+    <!-- Add task modal -->
     <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true"> 
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -170,6 +169,60 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                                        
                     <button type="button" class="btn btn-primary skillAdd">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="edittaskModalLabel" aria-hidden="true"> 
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="taskModalTitle modal-title fs-5" id="taskModalLabel"> ✏️ Edit Task</h1>
+                </div>
+                <div class="modal-body">
+                    <label for="taskEditName" class="form-label">Task Name</label>
+                    <div class="input-group mb-3">
+                        <input type="text" id="taskEditName" class="form-control" placeholder="Task Name" aria-label="Task Name" aria-describedby="basic-addon1">
+                    </div>          
+                    <hr>      
+                    <label for="taskEditDescription" class="form-label">Task Description📝</label>                           
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" id="taskEditDescription" placeholder="Task Description" aria-label="Task Description"></textarea>
+                    </div>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <label for="deadlineInput">Deadline 📅:</label>
+                        <input type="date" id="deadlineEdit" name="deadline" class="ms-4 rounded-2"
+                        value="0000-00-00"/> <!-- WHEN CODE IMPLEMENTED CHANGE TO CURRENT DATE-->
+                    </div>
+                    <hr>
+                    <div class="input-group mb-3">
+                        <label for="priorityRange" class="form-label">Priority ⚠️</label>
+                        <div class="d-flex flex-column w-100">
+                            <input type="range" class="form-range" id="priorityRangeEdit"
+                                   min="1" 
+                                   max="10" 
+                                   value="5">
+                            <div class="d-flex justify-content-between mt-1 ms-2">
+                                <span class="text-muted" style="font-size: 0.8rem">1</span>
+                                <span class="text-muted" style="font-size: 0.8rem">2</span>
+                                <span class="text-muted" style="font-size: 0.8rem">3</span>
+                                <span class="text-muted" style="font-size: 0.8rem">4</span>
+                                <span class="text-muted" style="font-size: 0.8rem">5</span>
+                                <span class="text-muted" style="font-size: 0.8rem">6</span>
+                                <span class="text-muted" style="font-size: 0.8rem">7</span>
+                                <span class="text-muted" style="font-size: 0.8rem">8</span>
+                                <span class="text-muted" style="font-size: 0.8rem">9</span>
+                                <span class="text-muted" style="font-size: 0.8rem">10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>                                                        
+                    <button type="button" class="btn btn-primary taskEdit">Edit Task</button>
                 </div>
             </div>
         </div>
