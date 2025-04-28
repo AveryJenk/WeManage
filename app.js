@@ -1,7 +1,23 @@
 console.log("App is working!");
 
+let currentEditedTask = [];
+const todoList = document.getElementById("todoList");
+const completedList = document.getElementById("completedList");
+const modalAddButton = document.querySelector("#addTaskModal .skillAdd");
+const modalEditButton = document.getElementById("editTask");
+const modalTaskName = document.getElementById("taskInputName");
+const modalTaskDesc = document.getElementById("taskInputDescription");
+const modalDeadline = document.getElementById("deadlineInput");
+const modalPriority = document.getElementById("priorityRange");
+const modalEditTaskName = document.getElementById("taskEditName");
+const modalEditTaskDesc = document.getElementById("taskEditDescription");
+const modalEditDeadline = document.getElementById("deadlineEdit");
+const modalEditPriority = document.getElementById("priorityRangeEdit");
+let taskBeingEdited = null; // Track which task is being edited
+
 document.addEventListener("DOMContentLoaded", function () {
   modalAddButton.addEventListener("click", addTask);
+  modalEditButton.addEventListener("click", editTask);
 
   console.log('This is working!');
   const storedtaskList = localStorage.getItem('taskListKey');
@@ -36,14 +52,6 @@ class Task {
 let taskNum = 0; //Allows for dynamic task naming numerically
 let taskList = []; // This will store all our task objects
 
-const todoList = document.getElementById("todoList");
-const completedList = document.getElementById("completedList");
-const modalAddButton = document.querySelector("#addTaskModal .skillAdd");
-const modalTaskName = document.getElementById("taskInputName");
-const modalTaskDesc = document.getElementById("taskInputDescription");
-const modalDeadline = document.getElementById("deadlineInput");
-const modalPriority = document.getElementById("priorityRange");
-let taskBeingEdited = null; // Track which task is being edited
 
 
 
@@ -140,19 +148,46 @@ function editTaskModalSetup(task) {
   // ✏️ Update existing task
   console.log(task);
 
-  const modalTaskName = document.getElementById("taskEditName");
-  const modalTaskDesc = document.getElementById("taskEditDescription");
-  const modalDeadline = document.getElementById("deadlineEdit");
-  const modalPriority = document.getElementById("priorityRangeEdit");
+  modalEditTaskName.value = task.name;
+  modalEditTaskDesc.value = task.description;
+  modalEditDeadline.value = task.deadline;
+  modalEditPriority.value = task.priority;
 
-  modalTaskName.value = task.name;
-  modalTaskDesc.value = task.description;
-  modalDeadline.value = task.deadline;
-  modalPriority.value = task.priority;
+  currentEditedTask = task;
+  return currentEditedTask; 
+}
 
+function editTask() {
+  currentEditedTask.name = modalEditTaskName.value.trim();
+  currentEditedTask.description = modalEditTaskDesc.value.trim();
+  currentEditedTask.deadline = modalEditDeadline.value.trim();
+  currentEditedTask.priority = modalEditPriority.value.trim();
 
+  if (!currentEditedTask) {
+    console.error("No task selected for editing!");
+    return;
+  }
+
+  // Find the <li> associated with this task
+  const taskElements = document.querySelectorAll('.list-group-item');
+  taskElements.forEach((li) => {
+    const id = li.dataset.taskId;
+    if (taskList[id] === currentEditedTask) {
+      // Update visual elements
+      li.querySelector("strong").innerText = `📋 ${currentEditedTask.name}`;
+      li.querySelector(".fs-6").innerText = `📅 ${currentEditedTask.deadline} |‼️ ${currentEditedTask.priority}`;
+    }
+  });
 
   localStorage.setItem('taskListKey', JSON.stringify(taskList));
+  // Reset modal
+  modalEditTaskName.value = "";
+  modalEditTaskDesc.value = "";
+  modalEditDeadline.value = "";
+  modalEditPriority.value = "5";
+
+  const editModalInstance = bootstrap.Modal.getInstance(document.getElementById("editTaskModal"));
+  editModalInstance.hide();
 }
 
 function openTaskModal(task) {
