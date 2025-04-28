@@ -136,7 +136,7 @@ function initializeTasks(task, id) {
             ⚙️
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item edit-task" href="#">✏️ Edit</a></li>
+            <li><a class="dropdown-item edit-task"  data-bs-toggle="modal" data-bs-target="#editTaskModal" href="#">✏️ Edit</a></li>
             <li><a class="dropdown-item delete-task" href="#">❌ Delete</a></li>
             <li><a class="dropdown-item complete-task" href="#">✅ Complete</a></li>
           </ul>
