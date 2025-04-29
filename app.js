@@ -138,11 +138,14 @@ function addTask() {
     const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
     modalInstance.hide();
 
-    //Will cache the list after every task modification
-    localStorage.setItem('taskListKey', JSON.stringify(taskList));
-  }
-  localStorage.setItem('taskListKey', JSON.stringify(taskList));
-}
+    //Will cache the list after every task modification (Kaylynn)
+        // Will cache the list after every task modification
+        localStorage.setItem('taskListKey', JSON.stringify(taskList));
+
+        //Call handleSort to refresh the list (Kaylynn)
+        handleSort();
+      }
+    }    
 
 function editTaskModalSetup(task) {
   // ✏️ Update existing task
@@ -402,7 +405,7 @@ function renderTasks() {
       initializeTasks(task, index);
     }
   });
-}
+
 
   // After rerendering, update localStorage
   localStorage.setItem('taskListKey', JSON.stringify(taskList));
