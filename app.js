@@ -369,7 +369,7 @@ const alphabeticalSort = document.getElementById('alphabeticalSort');
 const prioritySort = document.getElementById('prioritySort');
 const deadlineSort = document.getElementById('deadlineSort');
 
-// Listen for sorting option change
+// Wait for sorting option change
 alphabeticalSort.addEventListener('change', handleSort);
 prioritySort.addEventListener('change', handleSort);
 deadlineSort.addEventListener('change', handleSort);
@@ -378,35 +378,28 @@ function handleSort() {
   if (alphabeticalSort.checked) {
     taskList.sort((a, b) => a.name.localeCompare(b.name));
   } else if (prioritySort.checked) {
-    taskList.sort((a, b) => b.priority - a.priority); // Higher priority first
+    taskList.sort((a, b) => b.priority - a.priority);
   } else if (deadlineSort.checked) {
     taskList.sort((a, b) => {
-      // Handle TBD dates: treat them as "very far in future"
       const dateA = a.deadline === "TBD" ? new Date(3000, 0, 1) : new Date(a.deadline);
       const dateB = b.deadline === "TBD" ? new Date(3000, 0, 1) : new Date(b.deadline);
       return dateA - dateB;
     });
   }
 
-  // After sorting, re-render tasks
   renderTasks();
+  localStorage.setItem('taskListKey', JSON.stringify(taskList));
 }
 
+// This will separate renderTasks() function outside
 function renderTasks() {
   todoList.innerHTML = '';
   completedList.innerHTML = '';
 
   taskList.forEach((task, index) => {
     if (task) {
-      // IMPORTANT: update the task id after sorting
-      task.id = index; 
+      task.id = index; // Update ID correctly after sorting
       initializeTasks(task, index);
     }
   });
-
-  localStorage.setItem('taskListKey', JSON.stringify(taskList));
-}
-
-  // After rerendering, update localStorage
-  localStorage.setItem('taskListKey', JSON.stringify(taskList));
 }
