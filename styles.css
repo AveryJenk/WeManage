@@ -65,7 +65,7 @@ body {
 
 /* Task List */
 #todoList .list-group-item {
-  background-color: #ffe0b2;
+  background-color: pink;
   color: #212529;
   border: none;
   border-radius: 6px;
