@@ -115,6 +115,7 @@ body {
 
 .flash-highlight {
   animation: flashHighlight 10s ease;
+  color: blueviolet;
 }
 
 
