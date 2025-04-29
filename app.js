@@ -207,6 +207,8 @@ updateStats(tasks);
 function initializeTasks(task, id) {
   const newTask = document.createElement("li");
   newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
+  newTask.dataset.taskId = id; // <-- Correctly placed here
+
   newTask.innerHTML = `
     <div class="d-flex justify-content-between align-items-center w-100">
       <div>
@@ -230,10 +232,11 @@ function initializeTasks(task, id) {
 
   const targetList = task.completed ? completedList : todoList;
   targetList.appendChild(newTask);
+
   newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
     e.stopPropagation();
   });
-  
+
   newTask.querySelector(".delete-task").addEventListener("click", (e) => {
     e.stopPropagation();
     const id = newTask.dataset.taskId;
@@ -247,20 +250,21 @@ function initializeTasks(task, id) {
     const id = newTask.dataset.taskId;
     if (taskList[id]) taskList[id].completed = true;
     newTask.classList.add("completed");
-    document.getElementById("completedList").appendChild(newTask);
+    completedList.appendChild(newTask);
     localStorage.setItem('taskListKey', JSON.stringify(taskList));
   });
 
   newTask.querySelector(".edit-task").addEventListener("click", (e) => {
     e.stopPropagation();
     const taskElement = e.target.closest('.list-group-item');
-        if (!taskElement) return;
+    if (!taskElement) return;
 
-        const id = taskElement.dataset.taskId;
-        const task = taskList[id];
-        editTaskModalSetup(task)
+    const id = taskElement.dataset.taskId;
+    const task = taskList[id];
+    editTaskModalSetup(task);
   });
 }
+
 
 // Live Search Feature -Flash highlight and Scroll to first match (Kaylynn)
 const searchInput = document.getElementById('skillSearch');
