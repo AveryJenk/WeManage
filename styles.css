@@ -1,113 +1,112 @@
+/* Fonts */
 header {
-    font-family: 'Inter', serif;
+  font-family: 'Inter', serif;
 }
 body {
-    font-family: 'Montserrat', serif;
-}
-/* Fonts above */
-
-nav {
-    opacity: .95;
+  font-family: 'Montserrat', serif;
+  height: auto;
+  background-color: #b68af6;
+  background-image: linear-gradient(#FFF176, #b68af6, #002bc3);
 }
 
-/* completed is for any task that has been completed, it will grey it out and strike it out */
-.completed {
-    text-decoration: line-through;
-    background-color: #828181;
+/* Navbar */
+.custom-navbar {
+  background-color: #6610f2;
+}
+.custom-outline-btn {
+  background-color: white;
+  color: #0d6efd;
+  border: 2px solid #0d6efd;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+.custom-outline-btn:hover {
+  background-color: #0d6efd;
+  color: white;
 }
 
-/* we cant use the same hover system for the completed tasks because bootstap freaks out and makes it wonky so i made this */
-.completed:hover {
-    background-color: #707070;
-}
+/* Header Logo */
 .header-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .header-logo img {
-    height: 100px;
-  }
- 
- body {
-    height: auto;
-    background-color: #b68af6; /* For browsers that do not support gradients */
-    background-image: linear-gradient( #FFF176,#b68af6, #002bc3);
- }
- #skillSearch {
-    background-color: #ffffff; 
-    border: 2px solid #4dabf7; 
-    border-radius: 10px;
-    padding: 10px;
-    color: #333; 
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  #skillSearch::placeholder {
-    color: black; 
-    opacity: 1;
-  }
-  
-  #skillSearch:focus {
-    outline: none;
-    border-color: #1e88e5; 
-    box-shadow: 0 0 0 10px rgba(77, 171, 247, 0.25);
-  }
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header-logo img {
+  height: 100px;
+}
 
-  .custom-navbar {
-    background-color: #6610f2;
-  }
-  .custom-outline-btn {
-    background-color: white;           
-    color: #0d6efd;                   
-    border: 2px solid #0d6efd;        
-    border-radius: 12px;             
-    padding: 8px 16px;
-    font-weight: 500;
-    transition: 0.3s ease;
-  }
-  
-  .custom-outline-btn:hover {
-    background-color: #0d6efd;       
-    color: white;
-  }
-  .main-panel {
-    background-color: transparent; 
-    box-shadow: none;
-  }
-  #todoList .list-group-item {
-    background-color:pink;
-    color: #212529;
-    border: none;
-    border-radius: 6px;
-    margin-bottom: 4px;
-  }
-  #completedList .list-group-item.completed {
-    background-color: greenyellow;
-    color: #333;
-    text-decoration: line-through;
-    border: none;
-    border-radius: 6px;
-    margin-bottom: 4px;
-  }
-  .card-header {
-    font-weight: bold;
-    font-size: 1.25rem;
-    color: #343a40;
-  }
-        
-  @keyframes flashGreen {
-    0% { background-color: lightgreen; }
-    50% { background-color: lightgreen; }
-    100% { background-color: transparent; }
-  }
-  
-  .flash-green {
-    animation: flashGreen 1s ease;
-  }
- 
-/* Sort Panel Styling (Kaylynn)*/
+/* Search Box */
+#skillSearch {
+  background-color: #ffffff;
+  border: 2px solid #4dabf7;
+  border-radius: 10px;
+  padding: 10px;
+  color: #333;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+#skillSearch::placeholder {
+  color: black;
+  opacity: 1;
+}
+#skillSearch:focus {
+  outline: none;
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 10px rgba(77, 171, 247, 0.25);
+}
+
+/* Main Panel */
+.main-panel {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Task List */
+#todoList .list-group-item {
+  background-color: pink;
+  color: #212529;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+#completedList .list-group-item.completed {
+  background-color: greenyellow;
+  color: #333;
+  text-decoration: line-through;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+/* Card Header */
+.card-header {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #343a40;
+}
+
+/* Completed Task */
+.completed {
+  text-decoration: line-through;
+  background-color: #828181;
+}
+.completed:hover {
+  background-color: #707070;
+}
+
+/* Search Flash Animation */
+@keyframes flashGreen {
+  0% { background-color: lightgreen; }
+  50% { background-color: lightgreen; }
+  100% { background-color: transparent; }
+}
+.flash-green {
+  animation: flashGreen 1s ease;
+}
+
+/* Sort Panel Styling */
 .list-group-item.bg-dark {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4) !important;
   color: #4a148c;
@@ -117,7 +116,7 @@ nav {
   text-align: center;
   border-radius: 10px 10px 0 0;
   padding: 15px 10px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 #sortPanel .list-group-item {
@@ -132,8 +131,6 @@ nav {
   gap: 10px;
   transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
 }
-
-/* Hover Effect for Sort Panel (Glow and Color!) */
 #sortPanel .list-group-item:hover {
   background: linear-gradient(135deg, #d4fc79, #96e6a1);
   transform: scale(1.05);
@@ -141,22 +138,14 @@ nav {
   cursor: pointer;
 }
 
-
-/* Hover Effect (Kaylynn)*/
-.list-group-item:hover {
-  background: linear-gradient(135deg, #d4fc79, #96e6a1);
-  transform: scale(1.03);
-  cursor: pointer;
-}
-
-/* Radio Buttons in Sort (Kaylynn)*/
+/* Radio Buttons in Sort */
 .form-check-input {
   width: 20px;
   height: 20px;
   margin-top: 0;
 }
 
-/* Labels and Emoji (Kaylynn)*/
+/* Labels and Emoji */
 .form-check-label {
   font-size: 1.2rem;
   display: flex;
@@ -164,11 +153,7 @@ nav {
   gap: 8px;
 }
 
-/* Bounce Effect (Kaylynn) */
-.form-check-label:hover {
-  animation: bounce 0.4s ease;
-}
-
+/* Bounce Animation */
 @keyframes bounce {
   0%, 100% {
       transform: translateY(0);
@@ -177,4 +162,6 @@ nav {
       transform: translateY(-5px);
   }
 }
-
+.form-check-label:hover {
+  animation: bounce 0.4s ease;
+}
