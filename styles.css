@@ -106,71 +106,66 @@ nav {
   .flash-green {
     animation: flashGreen 1s ease;
   }
-  /* Styling the sort bar (kaylynn)*/
-.sidebar-sort-panel {
-  background: linear-gradient(135deg, #343a40, #495057);
-  border-radius: 12px;
+ /* Sort Panel (Kaylynn)*/
+.list-group-item.bg-dark {
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc) !important; /* soft pastel purple-blue */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+  border-radius: 15px 15px 0 0;
   padding: 10px;
 }
 
-/* Sort Header */
-.sidebar-sort-panel .list-group-item.bg-dark {
-  background: transparent !important;
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: #ffffff;
-  text-align: center;
-  border-bottom: 2px solid #ffffff33;
-  margin-bottom: 8px;
-}
-
-/* Sort Options (A-Z, Priority, Deadline) */
-.sidebar-sort-panel .list-group-item {
-  background: #f8f9fa;
+/* Sort options (A-Z, Priority, Deadline) */
+.list-group-item {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
   font-size: 1.2rem;
+  font-weight: 600;
+  background-color: #f9f9ff; /* very light purple/white */
+  border: none;
+  border-bottom: 1px solid #dee2e6;
   display: flex;
   align-items: center;
   gap: 10px;
-  border: none;
-  margin-bottom: 8px;
   transition: background-color 0.3s, transform 0.2s;
-  border-radius: 8px;
 }
 
-/* Hover effect */
-.sidebar-sort-panel .list-group-item:hover {
-  background-color: #e2e6ea;
+/* Hover interaction (Kaylynn)  */
+.list-group-item:hover {
+  background-color: #f0e6ff; /* super light pastel purple */
   transform: scale(1.02);
   cursor: pointer;
 }
 
-/* Radio buttons bigger */
-.sidebar-sort-panel .form-check-input {
-  width: 22px;
-  height: 22px;
+/* Button styles (Kaylynn) */
+.form-check-input {
+  width: 20px;
+  height: 20px;
   margin-top: 0;
+  accent-color: #8ec5fc; 
 }
 
-/* Labels (text and emoji) */
-.sidebar-sort-panel .form-check-label {
-  font-size: 1.2rem;
+/* Evening out emojis in sidebar (Kaylynn) */
+.form-check-label {
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Bounce Animation on hover */
-.sidebar-sort-panel .form-check-label:hover {
+/* Animation when hovering for interactibility (Kaylynn) */
+.form-check-label:hover {
   animation: bounce 0.4s ease;
 }
 
+/* Bounce for interactibility (Kaylynn) */
 @keyframes bounce {
   0%, 100% {
-      transform: translateY(0);
+    transform: translateY(0);
   }
   50% {
-      transform: translateY(-5px);
+    transform: translateY(-5px);
   }
 }
