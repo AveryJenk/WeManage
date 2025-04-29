@@ -369,7 +369,7 @@ const alphabeticalSort = document.getElementById('alphabeticalSort');
 const prioritySort = document.getElementById('prioritySort');
 const deadlineSort = document.getElementById('deadlineSort');
 
-// Wait for sorting option change
+// Listen for sorting option change
 alphabeticalSort.addEventListener('change', handleSort);
 prioritySort.addEventListener('change', handleSort);
 deadlineSort.addEventListener('change', handleSort);
@@ -402,4 +402,8 @@ function renderTasks() {
       initializeTasks(task, index);
     }
   });
+}
+
+  // After rerendering, update localStorage
+  localStorage.setItem('taskListKey', JSON.stringify(taskList));
 }
