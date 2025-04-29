@@ -231,7 +231,6 @@ function initializeTasks(task, id) {
 
   const targetList = task.completed ? completedList : todoList;
   targetList.appendChild(newTask);
-  newTask.classList.add('sparkle-flash');
   newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
     e.stopPropagation();
   });
