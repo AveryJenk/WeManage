@@ -208,7 +208,6 @@ function initializeTasks(task, id) {
   const newTask = document.createElement("li");
   newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
   newTask.innerHTML = `
-  newTask.dataset.taskId = id;
     <div class="d-flex justify-content-between align-items-center w-100">
       <div>
         <strong>📋 ${task.name}</strong><br>
