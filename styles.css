@@ -70,7 +70,7 @@ body {
   border: none;
   border-radius: 6px;
   margin-bottom: 6px;
-  transition: all 0.3s ease; /* smooth animation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Hover Effect specifically for To-Do List */
