@@ -64,7 +64,7 @@ function addTask() {
 
     // Clear and re-render the task list
     renderTasks();
-
+    updateStats(taskList);///////test
     // Reset modal input fields
     modalTaskName.value = "";
     modalTaskDesc.value = "";
