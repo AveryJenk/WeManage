@@ -107,14 +107,16 @@ body {
 }
 
 /* Search Flash Animation (Kaylynn) */
-@keyframes flashGreen {
-  0% { background-color: lightgreen; }
-  50% { background-color: lightgreen; }
+@keyframes flashHighlight {
+  0% { background-color: #FFF59D; } /* Light Yellow */
+  50% { background-color: #FFF59D; }
   100% { background-color: transparent; }
 }
-.flash-green {
-  animation: flashGreen 1s ease;
+
+.flash-highlight {
+  animation: flashHighlight 10s ease;
 }
+
 
 @keyframes sparkleFlash {
   0% { background-color: #ffe0f7; }

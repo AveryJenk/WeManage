@@ -278,12 +278,12 @@ searchInput.addEventListener('input', function () {
     const taskText = task.querySelector('strong').textContent.toLowerCase();
 
     // Remove any previous animation
-    task.classList.remove('flash-green');
+    task.classList.remove('flash-highlight');
 
     if (searchValue && taskText.includes(searchValue)) {
       // Trigger flash animation
       void task.offsetWidth; 
-      task.classList.add('flash-green');
+      task.classList.add('flash-highlight');
 
       // Scroll first match into center view
       if (!firstMatchFound) {
