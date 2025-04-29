@@ -52,9 +52,6 @@ class Task {
 let taskNum = 0; //Allows for dynamic task naming numerically
 let taskList = []; // This will store all our task objects
 
-
-
-
 function addTask() {
   const name = modalTaskName.value.trim();
   const description = modalTaskDesc.value.trim();
@@ -62,90 +59,54 @@ function addTask() {
   const priority = modalPriority.value;
 
   if (name) {
-    if (taskBeingEdited) {
-      editTask(name, description, deadline, priority);
-    } else {
-      // ➕ Add new task
-      const newTask = document.createElement("li");
-      newTask.className = "list-group-item list-group-item-action";
-      newTask.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center w-100">
-          <div>
-            <strong>📋 ${name}</strong><br>
-          </div>
-          <div class="text-end">
-            <span class="fs-6">📅 ${deadline} |‼️  ${priority}</span>
-            <div class="dropdown d-inline ms-2">
-              <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                ⚙️
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item edit-task" data-bs-toggle="modal" data-bs-target="#editTaskModal">✏️ Edit</a></li>
-                <li><a class="dropdown-item delete-task">❌ Delete</a></li>
-                <li><a class="dropdown-item complete-task">✅ Complete</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      `;
+    const taskObj = new Task(name, description, deadline, priority, false);
+    taskList.push(taskObj);
 
-      todoList.appendChild(newTask);
+    // Clear and re-render the task list
+    renderTasks();
 
-      const taskObj = new Task(name, description, deadline, priority, false);
-      taskList.push(taskObj);
-      newTask.dataset.taskId = taskList.length - 1;
-
-      /** This is for the dropdown options for tasks */
-      newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-      
-      newTask.querySelector(".delete-task").addEventListener("click", (e) => {
-        e.stopPropagation();
-        const id = newTask.dataset.taskId;
-        taskList[id] = null;
-        newTask.remove();
-        localStorage.setItem('taskListKey', JSON.stringify(taskList));
-      });
-
-      newTask.querySelector(".complete-task").addEventListener("click", (e) => {
-        e.stopPropagation();
-        const id = newTask.dataset.taskId;
-        if (taskList[id]) taskList[id].completed = true;
-        newTask.classList.add("completed");
-        document.getElementById("completedList").appendChild(newTask);
-        localStorage.setItem('taskListKey', JSON.stringify(taskList));
-      });
-
-      newTask.querySelector(".edit-task").addEventListener("click", (e) => {
-        e.stopPropagation();
-        const taskElement = e.target.closest('.list-group-item');
-        if (!taskElement) return;
-
-        const id = taskElement.dataset.taskId;
-        const task = taskList[id];
-        editTaskModalSetup(task)
-
-      });
-    }
-
-    // Reset modal
+    // Reset modal input fields
     modalTaskName.value = "";
     modalTaskDesc.value = "";
     modalDeadline.value = "";
     modalPriority.value = "5";
 
+    // Close modal
     const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
     modalInstance.hide();
 
-    //Will cache the list after every task modification (Kaylynn)
-        // Will cache the list after every task modification
-        localStorage.setItem('taskListKey', JSON.stringify(taskList));
+    // Save to localStorage
+    localStorage.setItem('taskListKey', JSON.stringify(taskList));
+  }
+}
+function addTask() {
+  const name = modalTaskName.value.trim();
+  const description = modalTaskDesc.value.trim();
+  const deadline = modalDeadline.value || "TBD";
+  const priority = modalPriority.value;
 
-        //Call handleSort to refresh the list (Kaylynn)
-        handleSort();
-      }
-    }    
+  if (name) {
+    const taskObj = new Task(name, description, deadline, priority, false);
+    taskList.push(taskObj);
+
+    // Clear and re-render the task list
+    renderTasks();
+
+    // Reset modal input fields
+    modalTaskName.value = "";
+    modalTaskDesc.value = "";
+    modalDeadline.value = "";
+    modalPriority.value = "5";
+
+    // Close modal
+    const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
+    modalInstance.hide();
+
+    // Save to localStorage
+    localStorage.setItem('taskListKey', JSON.stringify(taskList));
+  }
+}
+
 
 function editTaskModalSetup(task) {
   // ✏️ Update existing task
