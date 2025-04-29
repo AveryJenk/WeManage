@@ -208,6 +208,7 @@ function initializeTasks(task, id) {
   const newTask = document.createElement("li");
   newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
   newTask.innerHTML = `
+  newTask.dataset.taskId = id;
     <div class="d-flex justify-content-between align-items-center w-100">
       <div>
         <strong>📋 ${task.name}</strong><br>
@@ -261,8 +262,6 @@ function initializeTasks(task, id) {
         const task = taskList[id];
         editTaskModalSetup(task)
   });
-  
-  newTask.dataset.taskId = id;
 }
 
 // Live Search Feature -Flash highlight and Scroll to first match (Kaylynn)

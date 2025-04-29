@@ -108,8 +108,8 @@ body {
 
 /* Search Flash Animation (Kaylynn) */
 @keyframes flashHighlight {
-  0% { background-color: #FFF59D; } /* Light Yellow */
-  50% { background-color: #FFF59D; }
+  0% { background-color: yellow; } /* Light Yellow */
+  50% { background-color:yellow; }
   100% { background-color: transparent; }
 }
 
@@ -188,3 +188,4 @@ body {
 .form-check-label:hover {
   animation: bounce 0.4s ease;
 }
+
