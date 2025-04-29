@@ -120,8 +120,7 @@ nav {
   box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
 }
 
-/* Sort Options (A-Z, Priority, Deadline) */
-.list-group-item {
+#sortPanel .list-group-item {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
@@ -131,8 +130,17 @@ nav {
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
 }
+
+/* Hover Effect for Sort Panel (Glow and Color!) */
+#sortPanel .list-group-item:hover {
+  background: linear-gradient(135deg, #d4fc79, #96e6a1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(150, 230, 161, 0.6);
+  cursor: pointer;
+}
+
 
 /* Hover Effect (Kaylynn)*/
 .list-group-item:hover {
