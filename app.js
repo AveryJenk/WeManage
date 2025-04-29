@@ -201,12 +201,13 @@ function updateStats(taskList) {
   progressBar.textContent = percent + '%';
 }
 
-updateStats(tasks);
+updateStats(taskList);
 
 
 function initializeTasks(task, id) {
-  const newTask = document.createElement("li");
-  newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
+    const newTask = document.createElement("li");
+    newTask.dataset.taskId = id;
+    newTask.className = `list-group-item list-group-item-action ${task.completed ? 'completed' : ''}`;
   
 
   newTask.innerHTML = `
