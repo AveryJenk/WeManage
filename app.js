@@ -398,9 +398,14 @@ function renderTasks() {
 
   taskList.forEach((task, index) => {
     if (task) {
+      // IMPORTANT: update the task id after sorting
+      task.id = index; 
       initializeTasks(task, index);
     }
   });
+
+  localStorage.setItem('taskListKey', JSON.stringify(taskList));
+}
 
   // After rerendering, update localStorage
   localStorage.setItem('taskListKey', JSON.stringify(taskList));
