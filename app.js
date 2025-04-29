@@ -265,7 +265,6 @@ function initializeTasks(task, id) {
 
 // Live Search Feature -Flash highlight and Scroll to first match (Kaylynn)
 const searchInput = document.getElementById('skillSearch');
-
 searchInput.addEventListener('input', function () {
   const searchValue = searchInput.value.trim().toLowerCase();
   const allTasks = document.querySelectorAll('#todoList .list-group-item, #completedList .list-group-item');
@@ -275,15 +274,13 @@ searchInput.addEventListener('input', function () {
   allTasks.forEach(task => {
     const taskText = task.querySelector('strong').textContent.toLowerCase();
 
-    // Remove any previous animation
+    // Remove previous highlight
     task.classList.remove('flash-highlight');
+    void task.offsetWidth; // Force browser to restart animation
 
     if (searchValue && taskText.includes(searchValue)) {
-      // Trigger flash animation
-      void task.offsetWidth; 
       task.classList.add('flash-highlight');
 
-      // Scroll first match into center view
       if (!firstMatchFound) {
         task.scrollIntoView({ behavior: 'smooth', block: 'center' });
         firstMatchFound = true;
@@ -291,6 +288,7 @@ searchInput.addEventListener('input', function () {
     }
   });
 });
+
 //This will make search button work when clicked (Kaylynn)
 const searchButton = document.getElementById('searchButton');
 searchButton.addEventListener('click', function() {

@@ -108,13 +108,13 @@ body {
 
 /* Search Flash Animation (Kaylynn) */
 @keyframes flashHighlight {
-  0% { background-color: yellow; } /* Light Yellow */
-  50% { background-color:yellow; }
+  0% { background-color: #ffff99; } /* Light yellow */
+  50% { background-color: #ffff99; }
   100% { background-color: transparent; }
 }
 
 .flash-highlight {
-  animation: flashHighlight 10s ease;
+  animation: flashHighlight 1s ease forwards;
   color: blueviolet;
 }
 
