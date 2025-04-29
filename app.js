@@ -170,36 +170,36 @@ document.getElementById('completedList').addEventListener('click', (event) => {
   }
 });
 
-// Sample data for tasks
-const tasks = [
-    { id: 1, status: 'finished' },
-    { id: 2, status: 'ongoing' },
-    { id: 3, status: 'finished' },
-    { id: 4, status: 'ongoing' },
-    { id: 5, status: 'overdue' }
-];
-
-// Function to update statistics
 function updateStats(taskList) {
-    const total = taskList.length;
-    const finished = taskList.filter(task => task.status === 'finished').length;
-    const ongoing = taskList.filter(task => task.status === 'ongoing').length;
-    const overdue = taskList.filter(task => task.status === 'overdue').length;
-    // Update the stats in the HTML
-    document.getElementById('totalTasks').textContent = total;
-    document.getElementById('ongoingTasks').textContent = ongoing;
-    document.getElementById('finishedTasks').textContent = finished;
-    document.getElementById('overdueTasks').textContent = overdue;
+  const now = new Date();
 
-    // Update progress bar
-    const percent = total > 0 ? Math.round((finished / total) * 100) : 0;
-    const progressBar = document.getElementById('progressBar');
+  const processedTasks = taskList.filter(task => task !== null).map(task => {
+    if (task.completed) {
+      return { ...task, status: 'finished' };
+    } else if (task.deadline !== "TBD" && new Date(task.deadline) < now) {
+      return { ...task, status: 'overdue' };
+    } else {
+      return { ...task, status: 'ongoing' };
+    }
+  });
 
-    progressBar.style.width = percent + '%';
-    progressBar.setAttribute('aria-valuenow', percent);
-    progressBar.textContent = percent + '%';
-};
+  const total = processedTasks.length;
+  const finished = processedTasks.filter(task => task.status === 'finished').length;
+  const ongoing = processedTasks.filter(task => task.status === 'ongoing').length;
+  const overdue = processedTasks.filter(task => task.status === 'overdue').length;
 
+  document.getElementById('totalTasks').textContent = total;
+  document.getElementById('ongoingTasks').textContent = ongoing;
+  document.getElementById('finishedTasks').textContent = finished;
+  document.getElementById('overdueTasks').textContent = overdue;
+
+  const percent = total > 0 ? Math.round((finished / total) * 100) : 0;
+  const progressBar = document.getElementById('progressBar');
+
+  progressBar.style.width = percent + '%';
+  progressBar.setAttribute('aria-valuenow', percent);
+  progressBar.textContent = percent + '%';
+}
 
 updateStats(tasks);
 
@@ -243,6 +243,7 @@ function initializeTasks(task, id) {
     taskList[id] = null;
     newTask.remove();
     localStorage.setItem('taskListKey', JSON.stringify(taskList));
+    updateStats(taskList);
   });
 
   newTask.querySelector(".complete-task").addEventListener("click", (e) => {
@@ -252,6 +253,7 @@ function initializeTasks(task, id) {
     newTask.classList.add("completed");
     completedList.appendChild(newTask);
     localStorage.setItem('taskListKey', JSON.stringify(taskList));
+    updateStats(taskList);
   });
 
   newTask.querySelector(".edit-task").addEventListener("click", (e) => {
