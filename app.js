@@ -79,34 +79,6 @@ function addTask() {
     localStorage.setItem('taskListKey', JSON.stringify(taskList));
   }
 }
-function addTask() {
-  const name = modalTaskName.value.trim();
-  const description = modalTaskDesc.value.trim();
-  const deadline = modalDeadline.value || "TBD";
-  const priority = modalPriority.value;
-
-  if (name) {
-    const taskObj = new Task(name, description, deadline, priority, false);
-    taskList.push(taskObj);
-
-    // Clear and re-render the task list
-    renderTasks();
-
-    // Reset modal input fields
-    modalTaskName.value = "";
-    modalTaskDesc.value = "";
-    modalDeadline.value = "";
-    modalPriority.value = "5";
-
-    // Close modal
-    const modalInstance = bootstrap.Modal.getInstance(document.getElementById("addTaskModal"));
-    modalInstance.hide();
-
-    // Save to localStorage
-    localStorage.setItem('taskListKey', JSON.stringify(taskList));
-  }
-}
-
 
 function editTaskModalSetup(task) {
   // ✏️ Update existing task
@@ -258,7 +230,7 @@ function initializeTasks(task, id) {
 
   const targetList = task.completed ? completedList : todoList;
   targetList.appendChild(newTask);
-
+  newTask.classList.add('sparkle-flash');
   newTask.querySelector(".dropdown-toggle").addEventListener("click", (e) => {
     e.stopPropagation();
   });

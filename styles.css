@@ -65,12 +65,22 @@ body {
 
 /* Task List */
 #todoList .list-group-item {
-  background-color: pink;
+  background-color: #cbe8f5; /* Light happy blue */
   color: #212529;
   border: none;
   border-radius: 6px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  transition: all 0.3s ease; /* smooth animation */
 }
+
+/* Hover Effect specifically for To-Do List */
+#todoList .list-group-item:hover {
+  background-color: #add8e6; /* slightly darker on hover */
+  transform: scale(1.02);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
 #completedList .list-group-item.completed {
   background-color:  #00ff00;
   color: #333;
@@ -104,6 +114,16 @@ body {
 }
 .flash-green {
   animation: flashGreen 1s ease;
+}
+
+@keyframes sparkleFlash {
+  0% { background-color: #ffe0f7; }
+  50% { background-color: #ffd6f6; }
+  100% { background-color: transparent; }
+}
+
+.sparkle-flash {
+  animation: sparkleFlash 0.8s ease;
 }
 
 /* Sort Panel Styling (Kaylynn)*/
