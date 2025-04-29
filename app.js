@@ -253,7 +253,7 @@ function updateStats(taskList) {
     document.getElementById('totalTasks').textContent = total;
     document.getElementById('ongoingTasks').textContent = ongoing;
     document.getElementById('finishedTasks').textContent = finished;
-    document.getElementById('overduetasks').textContent = overdue;
+    document.getElementById('overdueTasks').textContent = overdue;
 
     // Update progress bar
     const percent = total > 0 ? Math.round((finished / total) * 100) : 0;
@@ -328,3 +328,38 @@ function initializeTasks(task, id) {
   
   newTask.dataset.taskId = id;
 }
+
+// Live Search Feature -Flash highlight and Scroll to first match (Kaylynn)
+const searchInput = document.getElementById('skillSearch');
+
+searchInput.addEventListener('input', function () {
+  const searchValue = searchInput.value.trim().toLowerCase();
+  const allTasks = document.querySelectorAll('#todoList .list-group-item, #completedList .list-group-item');
+
+  let firstMatchFound = false;
+
+  allTasks.forEach(task => {
+    const taskText = task.querySelector('strong').textContent.toLowerCase();
+
+    // Remove any previous animation
+    task.classList.remove('flash-green');
+
+    if (searchValue && taskText.includes(searchValue)) {
+      // Trigger flash animation
+      void task.offsetWidth; 
+      task.classList.add('flash-green');
+
+      // Scroll first match into center view
+      if (!firstMatchFound) {
+        task.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstMatchFound = true;
+      }
+    }
+  });
+});
+//This will make search button work when clicked (Kaylynn)
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', function() {
+  const event = new Event('input');
+  searchInput.dispatchEvent(event); // Manually trigger the same search
+});

@@ -97,3 +97,13 @@ nav {
     color: #343a40;
   }
         
+  @keyframes flashGreen {
+    0% { background-color: lightgreen; }
+    50% { background-color: lightgreen; }
+    100% { background-color: transparent; }
+  }
+  
+  .flash-green {
+    animation: flashGreen 1s ease;
+  }
+  
